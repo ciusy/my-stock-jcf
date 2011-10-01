@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trend_lines>
+  <trend_line>
+    <date0>2011-08-29 00:00:00</date0>
+    <date1>2011-09-22 00:00:00</date1>
+    <value0>35.61</value0>
+    <value1>29.47</value1>
+    <line_color>ff00ffff</line_color>
+    <line_alpha />
+    <line_width />
+    <dash_length>5</dash_length>
+    <axis />
+    <chart_id>0</chart_id>
+    <locked>true</locked>
+  </trend_line>
+</trend_lines>
+
