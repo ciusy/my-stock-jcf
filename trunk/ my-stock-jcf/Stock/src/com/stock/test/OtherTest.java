@@ -12,6 +12,7 @@ import java.nio.FloatBuffer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -184,7 +185,14 @@ public class OtherTest {
 	@Test
 	public void test111(){
 //		System.out.println(DateUtil.dateToString(new Date(), "yyyyMMdd"));
-		System.out.println(this.getClass().getClassLoader().getResource(".").getPath());
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		
+		Calendar cal1 = Calendar.getInstance();
+		cal1.setTime(DateUtil.stringToDate("2000-10-2"));
+		
+		System.out.println(cal.get(Calendar.YEAR)+" "+cal.get(Calendar.WEEK_OF_YEAR));
+		System.out.println(cal1.get(Calendar.YEAR)+" "+cal1.get(Calendar.WEEK_OF_YEAR));
 	}
 	
 	@Test public void test7(){
