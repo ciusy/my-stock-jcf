@@ -15,7 +15,8 @@ public class PivotalCandleStickManager {
 	private static final int TREND_LENTH = 5;
 	private static final double MAX_SLOPE = 500.7;
 	private static final double MIN_SLOPE = 0.00000000005;
-	private static final int RSI14 = 50;
+	private static final int RSI14_DOWN = 50; //55
+	private static final int RSI14_UP = 40; //45
 	private static final double EFFECTIVE_RAISE_FALL_PERCENT = 0.12;
 	
 	private int arrayLength = 0;
@@ -315,10 +316,10 @@ public class PivotalCandleStickManager {
 				}
 				
 				if((list.get(i).getPeriodSecond().getCdlStickHigh().getHigh() < high 
-//						&& (
-////								rsi < RSI14 || 
-//								raisefallPercent >= EFFECTIVE_RAISE_FALL_PERCENT
-//							)
+						&& (
+								rsi < RSI14_UP || 
+								raisefallPercent >= EFFECTIVE_RAISE_FALL_PERCENT
+							)
 					) 
 				   || i == list.size()-1	
 //				   || !TrendLineManager.slopeEffective(TrendLineManager.getSlope(diffY, diffX))
@@ -378,7 +379,7 @@ public class PivotalCandleStickManager {
 				}
 				
 				if ((list.get(i).getPeriodSecond().getCdlStickLow().getLow() > low  
-						&&(rsi > RSI14 || raisefallPercent >= EFFECTIVE_RAISE_FALL_PERCENT))
+						&&(rsi > RSI14_DOWN || raisefallPercent >= EFFECTIVE_RAISE_FALL_PERCENT))
 					|| i == list.size()-1
 //					|| !TrendLineManager.slopeEffective(TrendLineManager.getSlope(diffY, diffX))
 					){
@@ -981,6 +982,7 @@ return trendSegmentList;
 		pcsClose = pcs[0];
 		
 		int week = c.get(Calendar.WEEK_OF_YEAR);
+		int year = c.get(Calendar.YEAR);
 		
 		int index = 0;
 		
@@ -989,7 +991,7 @@ return trendSegmentList;
 			Calendar c2=Calendar.getInstance();
 			c2.setTime(pcs[i].getDate());
 			
-			if(c2.get(Calendar.WEEK_OF_YEAR) == week){
+			if(c2.get(Calendar.WEEK_OF_YEAR) == week && c2.get(Calendar.YEAR) == year){
 				//比较数据
 				if(pcs[i].getHigh() >= high){
 					high = pcs[i].getHigh();
@@ -1015,6 +1017,7 @@ return trendSegmentList;
 				index ++ ;
 				
 				week = c2.get(Calendar.WEEK_OF_YEAR);
+				year = c2.get(Calendar.YEAR);
 				
 				high = 0.0;
 				low = 100000.0;
