@@ -11,19 +11,35 @@ public class PeriodCandleStick {
 	private PivotalCandleStick cdlStickOpen;
 	private PivotalCandleStick cdlStickClose;
 	
+	//根据period在通达信显示的 PivotalCandleStick
+	private PivotalCandleStick cdlPeriodPoint;
 	
 	public PeriodCandleStick() {
 	}
 	
+//	public PeriodCandleStick(int id, PivotalCandleStick cdlStickHigh,
+//			PivotalCandleStick cdlStickLow, Period period,
+//			PivotalCandleStick cdlStickOpen,PivotalCandleStick cdlStickClose) {
+//		this.id = id;
+//		this.cdlStickHigh = cdlStickHigh;
+//		this.cdlStickLow = cdlStickLow;
+//		this.period = period;
+//		this.cdlStickClose = cdlStickClose;
+//		this.cdlStickOpen = cdlStickOpen;
+//	}
+	
 	public PeriodCandleStick(int id, PivotalCandleStick cdlStickHigh,
 			PivotalCandleStick cdlStickLow, Period period,
-			PivotalCandleStick cdlStickOpen,PivotalCandleStick cdlStickClose) {
+			PivotalCandleStick cdlStickOpen, PivotalCandleStick cdlStickClose,
+			PivotalCandleStick cdlPeriodPoint) {
+		super();
 		this.id = id;
 		this.cdlStickHigh = cdlStickHigh;
 		this.cdlStickLow = cdlStickLow;
 		this.period = period;
-		this.cdlStickClose = cdlStickClose;
 		this.cdlStickOpen = cdlStickOpen;
+		this.cdlStickClose = cdlStickClose;
+		this.cdlPeriodPoint = cdlPeriodPoint;
 	}
 	
 	public int getId() {
@@ -62,8 +78,12 @@ public class PeriodCandleStick {
 	public void setCdlStickClose(PivotalCandleStick cdlStickClose) {
 		this.cdlStickClose = cdlStickClose;
 	}
-	
-	
+	public PivotalCandleStick getCdlPeriodPoint() {
+		return cdlPeriodPoint;
+	}
+	public void setCdlPeriodPoint(PivotalCandleStick cdlPeriodPoint) {
+		this.cdlPeriodPoint = cdlPeriodPoint;
+	}
 
 	@Override
 	public boolean equals(Object obj) {

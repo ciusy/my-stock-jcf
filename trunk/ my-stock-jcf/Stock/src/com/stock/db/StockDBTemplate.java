@@ -30,11 +30,11 @@ public class StockDBTemplate extends JdbcAbstractTemplate {
 	/**
 	 * 获取stock信息,前300个
 	 */
-	public PivotalCandleStick[] getLimitStock(String stockId,String whereSql,Object[] params){
+	public PivotalCandleStick[] getLimitStock(String stockId,String whereSql,Object[] params,int limit){
 		
 		//拼接sql语句
 		String sql = "select DISTINCT date,high,low,open,close,volumn from " +
-				"(select * from "+"t_"+stockId+" order by date desc limit 300) as "+"t_"+stockId+
+				"(select * from "+"t_"+stockId+" order by date desc limit "+limit+") as "+"t_"+stockId+
 				(whereSql==null || "".equals(whereSql.trim())? " ": 
 					" where "+ whereSql)+" order by date asc";
 		

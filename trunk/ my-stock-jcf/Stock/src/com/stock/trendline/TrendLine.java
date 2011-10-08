@@ -1,7 +1,5 @@
 package com.stock.trendline;
 
-import java.util.List;
-
 /**
  * 趋势线
  * 
@@ -13,6 +11,10 @@ public class TrendLine {
 	//实际值
 	private PivotalCandleStick cdlStickFirst;
 	private PivotalCandleStick cdlStickSecond;
+	//根据period生成的通达信上显示的日期
+	private PivotalCandleStick cdlStickPeriodFirst;
+	private PivotalCandleStick cdlStickPeriodSecond;
+	
 	private double Slope;
 	private TrendStyle.Direct trendStyle;
 	private TrendStyle.Color color;
@@ -22,7 +24,7 @@ public class TrendLine {
 	private TrendStyle.Period period;
 	//拟合的直线信息 y = b*x+a
 	private double b; //斜率
-	private PivotalCandleStick  startVirtualCandle;
+	private PivotalCandleStick startVirtualCandle;
 
 	public PivotalCandleStick getCdlStickFirst() {
 		return cdlStickFirst;
@@ -112,6 +114,22 @@ public class TrendLine {
 		this.startVirtualCandle = startVirtualCandle;
 	}
 	
+	public PivotalCandleStick getCdlStickPeriodFirst() {
+		return cdlStickPeriodFirst;
+	}
+
+	public void setCdlStickPeriodFirst(PivotalCandleStick cdlStickPeriodFirst) {
+		this.cdlStickPeriodFirst = cdlStickPeriodFirst;
+	}
+
+	public PivotalCandleStick getCdlStickPeriodSecond() {
+		return cdlStickPeriodSecond;
+	}
+
+	public void setCdlStickPeriodSecond(PivotalCandleStick cdlStickPeriodSecond) {
+		this.cdlStickPeriodSecond = cdlStickPeriodSecond;
+	}
+
 	//trendLine的跨度
 	public int len(){
 		return cdlStickSecond.getCi()-cdlStickFirst.getCi();

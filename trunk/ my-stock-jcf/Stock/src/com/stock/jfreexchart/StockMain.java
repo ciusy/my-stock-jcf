@@ -27,7 +27,7 @@ public class StockMain {
 		DataManager dm = new DataManager();
 		
 //		PivotalCandleStick[] pcsArray = dm.getExpPivotalCandleStick("600416", "", null);
-		PivotalCandleStick[] pcsArray = dm.getPivotalCandleStick("600416", "", null);
+		PivotalCandleStick[] pcsArray = dm.getPivotalCandleStick("600416", "", null,300);
 		
 		TrendLineManager tlm = new TrendLineManager();
 		tlm.getTrendLines(TrendStyle.Period.days,"600416");

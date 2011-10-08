@@ -1,9 +1,7 @@
 package com.stock.test;
 
 import java.util.List;
-
 import org.junit.Test;
-
 import com.stock.accessFile.ReadFromFile;
 import com.stock.db.StockDBTemplate;
 import com.stock.trendline.DateUtil;
@@ -24,7 +22,7 @@ public class TrendLineManagerTest {
 		List<String> tbls = template.getStockTableName(whereSql,params);
 		
 		
-		TrendStyle.Period period = TrendStyle.Period.days;//日线
+		TrendStyle.Period period = TrendStyle.Period.week;//周线 //TrendStyle.Period.days;//日线
 		int linePeriod = 4; //line.dat里面日线的代码是4，其他的待修改
 		
 		//保存line.dat 路径
@@ -64,11 +62,11 @@ public class TrendLineManagerTest {
 					//写line.dat到指定的路径
 					ReadFromFile.writeLinedat(linepath+"line.dat",
 							market,linePeriod,stockCode,
-							Integer.parseInt((DateUtil.dateToString(tlm.getTrendLineList().get(j).getCdlStickFirst().getDate(),"yyyyMMdd"))),
+							Integer.parseInt((DateUtil.dateToString(tlm.getTrendLineList().get(j).getCdlStickPeriodFirst().getDate(),"yyyyMMdd"))),
 							tlm.getTrendLineList().get(j).getTrendStyle() == TrendStyle.Direct.Rise ? 
 									(float)tlm.getTrendLineList().get(j).getCdlStickFirst().getLow():
 										(float)tlm.getTrendLineList().get(j).getCdlStickFirst().getHigh(),
-							Integer.parseInt((DateUtil.dateToString(tlm.getTrendLineList().get(j).getCdlStickSecond().getDate(),"yyyyMMdd"))),
+							Integer.parseInt((DateUtil.dateToString(tlm.getTrendLineList().get(j).getCdlStickPeriodSecond().getDate(),"yyyyMMdd"))),
 							tlm.getTrendLineList().get(j).getTrendStyle() == TrendStyle.Direct.Rise ? 
 									(float)tlm.getTrendLineList().get(j).getCdlStickSecond().getLow():
 										(float)tlm.getTrendLineList().get(j).getCdlStickSecond().getHigh()
@@ -92,12 +90,12 @@ public class TrendLineManagerTest {
 	public void test3(){
 		TrendLineManager tlm = new TrendLineManager();
 		//sh600585/000401
-		tlm.getTrendLines(TrendStyle.Period.days,"sh601318");
+		tlm.getTrendLines(TrendStyle.Period.week,"sh600051");
 		for(TrendLine tl : tlm.getTrendLineList()){
 			System.out.println(tl.getTrendStyle());
 			System.out.println(tl.getCdlStickFirst().getCi()+"-->"+tl.getCdlStickSecond().getCi());
+			System.out.println(DateUtil.dateToString(tl.getCdlStickPeriodFirst().getDate())+"-->"+DateUtil.dateToString(tl.getCdlStickPeriodSecond().getDate()));
 			System.out.println(DateUtil.dateToString(tl.getCdlStickFirst().getDate())+"-->"+DateUtil.dateToString(tl.getCdlStickSecond().getDate()));
-			System.out.println("--B:"+tl.getB()+DateUtil.dateToString(tl.getStartVirtualCandle().getDate()));
 			
 		}
 //		tlm.toXml("f:\\java\\amchart\\amstock\\examples\\candlestick_test\\trend_lines.xml");
@@ -147,7 +145,7 @@ public class TrendLineManagerTest {
 	
 	@Test
 	public void testWriteZXGblk(){
-
+		System.out.println("testing...");
 	}
 	
 	//
@@ -165,13 +163,6 @@ public class TrendLineManagerTest {
 //		tlm.toXml("f:\\java\\amchart\\amstock\\examples\\candlestick_test\\trend_lines.xml");
 	}
 	
-	@Test
-	public void test2(){
-		
-		TrendLineManager tlm = new TrendLineManager();
-		tlm.prepareData();
-		
-	}
 	
 	@Test
 	public void testFit(){
