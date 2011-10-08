@@ -11,8 +11,8 @@ public class DataManagerTest {
 	@Test
 	public void testGetData(){
 		DataManager dm = new DataManager();
-		PivotalCandleStick[] pcsArray =dm.getExpPivotalCandleStick("600416", "", null);
+//		PivotalCandleStick[] pcsArray =dm.getExpPivotalCandleStick("600416", "", null);
 //		System.out.println(DateUtil.dateToString(DateUtil.dateIncreaseByDay(pcsArray[0].getDate(),1)));
-		System.out.println(pcsArray[0].getOpen());
+//		System.out.println(pcsArray[0].getOpen());
 	}
 }

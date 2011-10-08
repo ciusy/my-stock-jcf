@@ -13,101 +13,104 @@ public class TrendLineManager {
 	private static final double MIN_TREND_ANGLE = 5;
 	private static final double MAX_TREND_ANGLE = 85;
 	
+	//扫描蜡烛的数量,其他的类推,如周线 300*5
+	private static final int CANDLE_COUNT = 300 ;
+	
 	private List<TrendLine> trendLineList = new ArrayList<TrendLine>(); 
 	private PivotalCandleStickManager pcsm = new PivotalCandleStickManager();
 	List<PeriodCandleStick> periodCandleList = new ArrayList<PeriodCandleStick>();
 	List<PeriodCandleStick> originalPeriodCandleList = new ArrayList<PeriodCandleStick>();
-	Formulas formula = new Formulas();
+//	Formulas formula = new Formulas();
 	
 //	PivotalCandleStick[] originalCandle = null;
 	PivotalCandleStick[] cStick = null;
 	
-	//找到趋势线对应的点(日周期)
-	public void getTrendLines(){
-		
-		prepareData();
-		
-		List<TrendSegment> trendSegmentList = pcsm.findPivotalCandleStick(pcsm.getSegmentList());
-		
-		//遍历趋势段
-		for (int i=0;i<trendSegmentList.size();i++){
-			
-			TrendLine tline = null;
-			//上升趋势段
-			if(trendSegmentList.get(i).getStyle() == TrendStyle.Direct.Rise){
-				
-//				double x
-				double slope = Double.MAX_VALUE;
-				
-				 for(int j : pcsm.getHighMap().keySet()){
-					 
-					 if(j >= trendSegmentList.get(i).getStartId() && j<= trendSegmentList.get(i).getEndId()){
-						//遍历上升的trend中的每一个蜡烛
-						PivotalCandleStick[] pcs = getTrendCandelIndexBetween(pcsm.getHighMap().get(j));
-						for(int p = 0;p<pcs.length;p++){
-						    double diffY =pcs[p].getLow()
-						    -pcsm.getHighMap().get(trendSegmentList.get(i).getStartId()).getCdlStickFirst().getLow();
-						    double currentSlope = getSlope(diffY,pcs[p].getCi()-pcsm.getHighMap().get(trendSegmentList.get(i).getStartId()).getCdlStickFirst().getCi());
-							if(slope > currentSlope){
-								slope = currentSlope;
-								tline = new TrendLine();
-								tline.setCdlStickFirst(pcsm.getHighMap().get(trendSegmentList.get(i).getStartId()).getCdlStickFirst());
-								tline.setCdlStickSecond(pcs[p]);
-								tline.setTrendStyle(TrendStyle.Direct.Rise);
-								tline.setSlope(slope);
-								tline.setTurnCdlStick(pcsm.getHighMap().get(trendSegmentList.get(i).getEndId()).getCdlStickSecond());
-							}
-						}
-						 
-					 }
-								
-				 }
-				 
-				 if(tline != null){
-					 tline.setColor(TrendStyle.Color.values()[trendLineList.size()%TrendStyle.Color.values().length]);
-					 trendLineList.add(tline);
-				 }
-				
-			}else{
-				
-				double slope = -Double.MAX_VALUE;
-				//找到下降趋势段中的下降趋势单个波段遍历
-				for(int j : pcsm.getLowMap().keySet()){
-					
-					if(j >= trendSegmentList.get(i).getStartId() && j <= trendSegmentList.get(i).getEndId()){
-						//遍历下降的trend中的每一个蜡烛
-						PivotalCandleStick[] pcs = getTrendCandelIndexBetween(pcsm.getLowMap().get(j));
-						for(int p = 0;p<pcs.length;p++){
-							double diffY = pcs[p].getHigh()
-							-pcsm.getLowMap().get(trendSegmentList.get(i).getStartId()).getCdlStickFirst().getHigh();
-							double currentSlope = getSlope(diffY,pcs[p].getCi()-pcsm.getLowMap().get(trendSegmentList.get(i).getStartId()).getCdlStickFirst().getCi());
-							if(slope < currentSlope){
-								slope = currentSlope;
-								tline = new TrendLine();
-								tline.setCdlStickFirst(pcsm.getLowMap().get(trendSegmentList.get(i).getStartId()).getCdlStickFirst());
-								tline.setCdlStickSecond(pcs[p]);
-								tline.setTrendStyle(TrendStyle.Direct.Fall);
-								tline.setSlope(slope);
-								tline.setTurnCdlStick(pcsm.getLowMap().get(trendSegmentList.get(i).getEndId()).getCdlStickSecond());
-							}
-						}
-						
-					}
-					
-				}
-				
-				if(tline != null){
-					tline.setColor(TrendStyle.Color.values()[trendLineList.size()%TrendStyle.Color.values().length]);
-					trendLineList.add(tline);
-				}
-				 
-			}
-			
-		}
-		
-		trendLineFilter();
-		searchBreakCdlStick();
-	}
+//	//找到趋势线对应的点(日周期)
+//	public void getTrendLines(){
+//		
+//		prepareData();
+//		
+//		List<TrendSegment> trendSegmentList = pcsm.findPivotalCandleStick(pcsm.getSegmentList());
+//		
+//		//遍历趋势段
+//		for (int i=0;i<trendSegmentList.size();i++){
+//			
+//			TrendLine tline = null;
+//			//上升趋势段
+//			if(trendSegmentList.get(i).getStyle() == TrendStyle.Direct.Rise){
+//				
+////				double x
+//				double slope = Double.MAX_VALUE;
+//				
+//				 for(int j : pcsm.getHighMap().keySet()){
+//					 
+//					 if(j >= trendSegmentList.get(i).getStartId() && j<= trendSegmentList.get(i).getEndId()){
+//						//遍历上升的trend中的每一个蜡烛
+//						PivotalCandleStick[] pcs = getTrendCandelIndexBetween(pcsm.getHighMap().get(j));
+//						for(int p = 0;p<pcs.length;p++){
+//						    double diffY =pcs[p].getLow()
+//						    -pcsm.getHighMap().get(trendSegmentList.get(i).getStartId()).getCdlStickFirst().getLow();
+//						    double currentSlope = getSlope(diffY,pcs[p].getCi()-pcsm.getHighMap().get(trendSegmentList.get(i).getStartId()).getCdlStickFirst().getCi());
+//							if(slope > currentSlope){
+//								slope = currentSlope;
+//								tline = new TrendLine();
+//								tline.setCdlStickFirst(pcsm.getHighMap().get(trendSegmentList.get(i).getStartId()).getCdlStickFirst());
+//								tline.setCdlStickSecond(pcs[p]);
+//								tline.setTrendStyle(TrendStyle.Direct.Rise);
+//								tline.setSlope(slope);
+//								tline.setTurnCdlStick(pcsm.getHighMap().get(trendSegmentList.get(i).getEndId()).getCdlStickSecond());
+//							}
+//						}
+//						 
+//					 }
+//								
+//				 }
+//				 
+//				 if(tline != null){
+//					 tline.setColor(TrendStyle.Color.values()[trendLineList.size()%TrendStyle.Color.values().length]);
+//					 trendLineList.add(tline);
+//				 }
+//				
+//			}else{
+//				
+//				double slope = -Double.MAX_VALUE;
+//				//找到下降趋势段中的下降趋势单个波段遍历
+//				for(int j : pcsm.getLowMap().keySet()){
+//					
+//					if(j >= trendSegmentList.get(i).getStartId() && j <= trendSegmentList.get(i).getEndId()){
+//						//遍历下降的trend中的每一个蜡烛
+//						PivotalCandleStick[] pcs = getTrendCandelIndexBetween(pcsm.getLowMap().get(j));
+//						for(int p = 0;p<pcs.length;p++){
+//							double diffY = pcs[p].getHigh()
+//							-pcsm.getLowMap().get(trendSegmentList.get(i).getStartId()).getCdlStickFirst().getHigh();
+//							double currentSlope = getSlope(diffY,pcs[p].getCi()-pcsm.getLowMap().get(trendSegmentList.get(i).getStartId()).getCdlStickFirst().getCi());
+//							if(slope < currentSlope){
+//								slope = currentSlope;
+//								tline = new TrendLine();
+//								tline.setCdlStickFirst(pcsm.getLowMap().get(trendSegmentList.get(i).getStartId()).getCdlStickFirst());
+//								tline.setCdlStickSecond(pcs[p]);
+//								tline.setTrendStyle(TrendStyle.Direct.Fall);
+//								tline.setSlope(slope);
+//								tline.setTurnCdlStick(pcsm.getLowMap().get(trendSegmentList.get(i).getEndId()).getCdlStickSecond());
+//							}
+//						}
+//						
+//					}
+//					
+//				}
+//				
+//				if(tline != null){
+//					tline.setColor(TrendStyle.Color.values()[trendLineList.size()%TrendStyle.Color.values().length]);
+//					trendLineList.add(tline);
+//				}
+//				 
+//			}
+//			
+//		}
+//		
+//		trendLineFilter();
+//		searchBreakCdlStick();
+//	}
 	
 	
 	//找到趋势线对应的点(add周期) 通用
@@ -119,6 +122,9 @@ public class TrendLineManager {
 		
 		//TrendLine的第一个基点
 		PivotalCandleStick basePointFirst = null ;
+		//TrendLine的第一个基点在通达信上面显示的蜡烛
+		PivotalCandleStick basePointPeriodFirst = null ;
+		
 		//第一个基点PeriodCandleStick的id，用于趋势基点较近的修正
 		int basePointFirstPcsCi = -1;
 		//遍历趋势段
@@ -171,6 +177,8 @@ public class TrendLineManager {
 								tline.setSlope(slope);
 								tline.setPeriod(period);
 								tline.setTurnCdlStick(pcsm.getHighMap().get(trendSegmentList.get(i).getEndId()).getPeriodSecond().getCdlStickHigh());
+								tline.setCdlStickPeriodFirst(pcsm.getHighMap().get(trendSegmentList.get(i).getStartId()).getPeriodFirst().getCdlPeriodPoint());
+								tline.setCdlStickPeriodSecond(periodcs[p].getCdlPeriodPoint());
 							}
 						}
 						
@@ -199,9 +207,10 @@ public class TrendLineManager {
 			}else{
 				
 				//当 basePointFirst为空时才从趋势的起点开始计算斜率
-				if(basePointFirst == null)
+				if(basePointFirst == null){
 					basePointFirst = pcsm.getLowMap().get(trendSegmentList.get(i).getStartId()).getPeriodFirst().getCdlStickHigh();
-				
+					basePointPeriodFirst = pcsm.getLowMap().get(trendSegmentList.get(i).getStartId()).getPeriodFirst().getCdlPeriodPoint();
+				}
 				//用于保存上升趋势段中的每个Trend的低点的Candle，用于找到拟合线
 				List<PivotalCandleStick> lowFirstCandleList = new ArrayList<PivotalCandleStick>();
 				//拟合趋势线的起始虚拟candle
@@ -239,6 +248,8 @@ public class TrendLineManager {
 								tline.setSlope(slope);
 								tline.setPeriod(period);
 								tline.setTurnCdlStick(pcsm.getLowMap().get(trendSegmentList.get(i).getEndId()).getPeriodSecond().getCdlStickLow());						
+								tline.setCdlStickPeriodFirst(basePointPeriodFirst);
+								tline.setCdlStickPeriodSecond(periodcs[p].getCdlPeriodPoint());
 							}
 						}
 						
@@ -266,16 +277,19 @@ public class TrendLineManager {
 					//当趋势线的基点太靠近时，重新寻找趋势线的基点
 					if(tline.len() < TREND_POINT_MIN_LEN){
 						basePointFirst = tline.getCdlStickSecond();
+						basePointPeriodFirst = tline.getCdlStickPeriodFirst();
 						basePointFirstPcsCi = tline.getCdlStickSecond().getCi(); //记录当前第二个基点作为下次的开始基点
 						i = i - 1; 
 					}else{
 						tline.setColor(TrendStyle.Color.values()[trendLineList.size()%TrendStyle.Color.values().length]);
 						trendLineList.add(tline);
 						basePointFirst = null;
+						basePointPeriodFirst = null;
 						basePointFirstPcsCi = -1;
 					}
 				}else{
 					basePointFirst = null;
+					basePointPeriodFirst = null;
 					basePointFirstPcsCi = -1;
 				}
 				 
@@ -338,63 +352,75 @@ public class TrendLineManager {
 	/**
 	 * 准备数据
 	 */
-	public void prepareData(){
-		
-		DataManager rf = new DataManager();
-		rf.convertToArray();	
-		formula.createDataArray(rf.getArray());
-		formula.createDateArray(rf.getArray());
-		formula.createExpArray();		
-		cStick = new PivotalCandleStick[formula.highArray.length];
-//		originalCandle = new PivotalCandleStick[formula.highArray.length];
-		
-		cStick = pcsm.transData(formula.highArray, formula.lowArray,formula.dateArray);
-//		originalCandle = pcsm.transData(formula.highArray, formula.lowArray,formula.dateArray);;
-		
-		pcsm.assembly(
-				//找到具有趋势的那些点合并修改重拍
-				pcsm.mergePivotalCandleStick(
-						cStick	
-				)
-		);
-		
-	}
+//	public void prepareData(){
+//		
+//		DataManager rf = new DataManager();
+//		rf.convertToArray();	
+//		formula.createDataArray(rf.getArray());
+//		formula.createDateArray(rf.getArray());
+//		formula.createExpArray();		
+//		cStick = new PivotalCandleStick[formula.highArray.length];
+////		originalCandle = new PivotalCandleStick[formula.highArray.length];
+//		
+//		cStick = pcsm.transData(formula.highArray, formula.lowArray,formula.dateArray);
+////		originalCandle = pcsm.transData(formula.highArray, formula.lowArray,formula.dateArray);;
+//		
+//		pcsm.assembly(
+//				//找到具有趋势的那些点合并修改重拍
+//				pcsm.mergePivotalCandleStick(
+//						cStick	
+//				)
+//		);
+//		
+//	}
 	
 	/**
 	 * 准备数据,带周期参数
 	 */
 	@SuppressWarnings("unchecked")
 	public void prepareData(TrendStyle.Period period,int len,String stockId,String whereSql,Object[] params){
-//		
-//System.out.println("****************"+stockId+"******************");
+
 		DataManager dm = new DataManager();
-		//指数坐标
-//		cStick = dm.getExpPivotalCandleStick(stockId,whereSql,params);
-		//正常坐标
-		cStick = dm.getPivotalCandleStick(stockId,whereSql,params);
+		cStick = dm.getPivotalCandleStick(stockId,whereSql,params,CANDLE_COUNT);
 		
 		switch(period.ordinal()){
-		case 0:periodCandleList=pcsm.getPeriodCandleStickByQuarter(cStick);break;
-		case 1:periodCandleList=pcsm.getPeriodCandleStickByMonth(cStick);break;
-		case 2:periodCandleList=pcsm.getPeriodCandleStickByWeek(cStick);break;
+		case 0:
+			cStick = dm.getPivotalCandleStick(stockId,whereSql,params,CANDLE_COUNT*5*4*3);
+			periodCandleList=pcsm.getPeriodCandleStickByQuarter(cStick);
+			break;
+		case 1:
+			cStick = dm.getPivotalCandleStick(stockId,whereSql,params,CANDLE_COUNT*5*4);
+			periodCandleList=pcsm.getPeriodCandleStickByMonth(cStick);
+			break;
+		case 2:
+			cStick = dm.getPivotalCandleStick(stockId,whereSql,params,CANDLE_COUNT*5);
+			periodCandleList=pcsm.getPeriodCandleStickByWeek(cStick);
+			break;
 		case 3:
-				periodCandleList=pcsm.getPeriodCandleStickByDaysExtend(cStick, len);
-				break;
+			cStick = dm.getPivotalCandleStick(stockId,whereSql,params,CANDLE_COUNT);
+			periodCandleList=pcsm.getPeriodCandleStickByDaysExtend(cStick, len);
+			break;
 		case 4:
-				periodCandleList=pcsm.getPeriodCandleStickByHours(cStick, len);
-				break;
+			cStick = dm.getPivotalCandleStick(stockId,whereSql,params,CANDLE_COUNT);
+			periodCandleList=pcsm.getPeriodCandleStickByHours(cStick, len);
+			break;
 		case 5:
 		case 6:
 		case 7:
 		case 8:
 		case 9:
-				if(len < 1) len = 30;
-				periodCandleList=pcsm.getPeriodCandleStickByMins(cStick,period,len);
-				break;
+			cStick = dm.getPivotalCandleStick(stockId,whereSql,params,CANDLE_COUNT);
+			if(len < 1) len = 30;
+			periodCandleList=pcsm.getPeriodCandleStickByMins(cStick,period,len);
+			break;
 		}
 		
 		originalPeriodCandleList = (List)((ArrayList)periodCandleList).clone();
 //		Collections.copy(originalPeriodCandleList, periodCandleList);
+		
+		for(PeriodCandleStick pcs : periodCandleList){
+		System.out.println("++"+DateUtil.dateToString(pcs.getCdlPeriodPoint().getDate())+"++"+DateUtil.dateToString(pcs.getCdlStickHigh().getDate()));
+		}
 		
 		//找波段
 		pcsm.assembly(

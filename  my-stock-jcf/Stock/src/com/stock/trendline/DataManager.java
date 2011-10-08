@@ -54,15 +54,15 @@ public class DataManager {
 
 	// 直接从数据库中获得数据
 	public PivotalCandleStick[] getPivotalCandleStick(String stockId,
-			String whereSql, Object[] params) {
+			String whereSql, Object[] params,int limit) {
 		StockDBTemplate template = new StockDBTemplate();
-		return template.getLimitStock(stockId, whereSql, params);
+		return template.getLimitStock(stockId, whereSql, params,limit);
 	}
 	
 	public PivotalCandleStick[] getExpPivotalCandleStick(String stockId,
-			String whereSql, Object[] params) {
+			String whereSql, Object[] params,int limit) {
 		StockDBTemplate template = new StockDBTemplate();
-		return toExpArray(template.getLimitStock(stockId, whereSql, params));
+		return toExpArray(template.getLimitStock(stockId, whereSql, params,limit));
 
 	}
 

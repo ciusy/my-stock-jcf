@@ -840,13 +840,13 @@ return trendSegmentList;
 				//最后结尾
 				if(i== pcs.length -1){
 					PeriodCandleStick periodcs = 
-						new PeriodCandleStick(index,pcsHigh,pcsLow,TrendStyle.Period.month,pcsOpen,pcsClose);
+						new PeriodCandleStick(index,pcsHigh,pcsLow,TrendStyle.Period.month,pcsOpen,pcsClose,pcs[i]);
 					pcslst.add(periodcs);
 				}
 				
 			}else{
 				PeriodCandleStick periodcs = 
-					new PeriodCandleStick(index,pcsHigh,pcsLow,TrendStyle.Period.month,pcsOpen,pcsClose);
+					new PeriodCandleStick(index,pcsHigh,pcsLow,TrendStyle.Period.month,pcsOpen,pcsClose,pcs[i-1]);
 				pcslst.add(periodcs);
 				index ++ ;
 				
@@ -921,14 +921,14 @@ return trendSegmentList;
 				
 				if(i == pcs.length - 1){
 					PeriodCandleStick periodcs = 
-						new PeriodCandleStick(index,pcsHigh,pcsLow,TrendStyle.Period.quarter,pcsOpen,pcsClose);
+						new PeriodCandleStick(index,pcsHigh,pcsLow,TrendStyle.Period.quarter,pcsOpen,pcsClose,pcs[i]);
 					pcslst.add(periodcs);
 				}
 
 			}else{
 				
 				PeriodCandleStick periodcs = 
-					new PeriodCandleStick(index,pcsHigh,pcsLow,TrendStyle.Period.quarter,pcsOpen,pcsClose);
+					new PeriodCandleStick(index,pcsHigh,pcsLow,TrendStyle.Period.quarter,pcsOpen,pcsClose,pcs[i-1]);
 				pcslst.add(periodcs);
 				index ++ ;
 				
@@ -1006,13 +1006,13 @@ return trendSegmentList;
 				
 				if(i == pcs.length -1){
 					PeriodCandleStick periodcs = 
-						new PeriodCandleStick(index,pcsHigh,pcsLow,TrendStyle.Period.week,pcsOpen,pcsClose);
+						new PeriodCandleStick(index,pcsHigh,pcsLow,TrendStyle.Period.week,pcsOpen,pcsClose,pcs[i]);
 					pcslst.add(periodcs);
 				}
 				
 			}else{
 				PeriodCandleStick periodcs = 
-					new PeriodCandleStick(index,pcsHigh,pcsLow,TrendStyle.Period.week,pcsOpen,pcsClose);
+					new PeriodCandleStick(index,pcsHigh,pcsLow,TrendStyle.Period.week,pcsOpen,pcsClose,pcs[i-1]);
 				pcslst.add(periodcs);
 				index ++ ;
 				
@@ -1130,7 +1130,7 @@ return trendSegmentList;
 				
 			}else{
 				PeriodCandleStick periodcs = 
-					new PeriodCandleStick(index,pcsHigh,pcsLow,TrendStyle.Period.days,pcsOpen,pcsClose);
+					new PeriodCandleStick(index,pcsHigh,pcsLow,TrendStyle.Period.days,pcsOpen,pcsClose,pcs[i-1]);
 				pcslst.add(periodcs);
 				index ++ ;
 				
@@ -1155,7 +1155,7 @@ return trendSegmentList;
 			
 			if(i == pcs.length -1){
 				PeriodCandleStick periodcs = 
-					new PeriodCandleStick(index,pcsHigh,pcsLow,TrendStyle.Period.days,pcsOpen,pcsClose);
+					new PeriodCandleStick(index,pcsHigh,pcsLow,TrendStyle.Period.days,pcsOpen,pcsClose,pcs[i]);
 				pcslst.add(periodcs);
 			}
 			
@@ -1215,7 +1215,7 @@ return trendSegmentList;
 				
 			}else{
 				PeriodCandleStick periodcs = 
-					new PeriodCandleStick(index,pcsHigh,pcsLow,TrendStyle.Period.hours,pcsOpen,pcsClose);
+					new PeriodCandleStick(index,pcsHigh,pcsLow,TrendStyle.Period.hours,pcsOpen,pcsClose,pcs[i-1]);
 				pcslst.add(periodcs);
 				index ++ ;
 				
@@ -1240,7 +1240,7 @@ return trendSegmentList;
 			
 			if(i == pcs.length-1){
 				PeriodCandleStick periodcs = 
-					new PeriodCandleStick(index,pcsHigh,pcsLow,TrendStyle.Period.hours,pcsOpen,pcsClose);
+					new PeriodCandleStick(index,pcsHigh,pcsLow,TrendStyle.Period.hours,pcsOpen,pcsClose,pcs[i]);
 				pcslst.add(periodcs);
 			}
 			
@@ -1295,7 +1295,7 @@ return trendSegmentList;
 				
 			}else{
 				PeriodCandleStick periodcs = 
-					new PeriodCandleStick(index,pcsHigh,pcsLow,period,pcsOpen,pcsClose);
+					new PeriodCandleStick(index,pcsHigh,pcsLow,period,pcsOpen,pcsClose,pcs[i-1]);
 				pcslst.add(periodcs);
 				index ++ ;
 				
@@ -1320,7 +1320,7 @@ return trendSegmentList;
 
 			if(i==pcs.length -1){
 				PeriodCandleStick periodcs = 
-					new PeriodCandleStick(index,pcsHigh,pcsLow,period,pcsOpen,pcsClose);
+					new PeriodCandleStick(index,pcsHigh,pcsLow,period,pcsOpen,pcsClose,pcs[i]);
 				pcslst.add(periodcs);
 			}
 			
