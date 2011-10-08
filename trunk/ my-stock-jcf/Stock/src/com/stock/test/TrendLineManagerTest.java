@@ -23,7 +23,7 @@ public class TrendLineManagerTest {
 		
 		
 		TrendStyle.Period period = TrendStyle.Period.week;//周线 //TrendStyle.Period.days;//日线
-		int linePeriod = 4; //line.dat里面日线的代码是4，其他的待修改
+		int linePeriod = 5;//周线//4; //line.dat里面日线的代码是4，其他的待修改
 		
 		//保存line.dat 路径
 		//this.getClass().getResource("/").getPath().substring(0, this.getClass().getResource("/").getPath().length()-4)+"/out/"
@@ -90,7 +90,7 @@ public class TrendLineManagerTest {
 	public void test3(){
 		TrendLineManager tlm = new TrendLineManager();
 		//sh600585/000401
-		tlm.getTrendLines(TrendStyle.Period.week,"sh600051");
+		tlm.getTrendLines(TrendStyle.Period.week,"sh600056");
 		for(TrendLine tl : tlm.getTrendLineList()){
 			System.out.println(tl.getTrendStyle());
 			System.out.println(tl.getCdlStickFirst().getCi()+"-->"+tl.getCdlStickSecond().getCi());

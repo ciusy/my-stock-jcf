@@ -119,7 +119,7 @@ public class TrendLineManager {
 		prepareData(period,len,stockId,whereSql,params);
 		
 		List<TrendSegment> trendSegmentList = pcsm.findPeriodCandleStick(originalPeriodCandleList,pcsm.getSegmentList());
-		
+
 		//TrendLine的第一个基点
 		PivotalCandleStick basePointFirst = null ;
 		//TrendLine的第一个基点在通达信上面显示的蜡烛
@@ -417,10 +417,6 @@ public class TrendLineManager {
 		
 		originalPeriodCandleList = (List)((ArrayList)periodCandleList).clone();
 //		Collections.copy(originalPeriodCandleList, periodCandleList);
-		
-		for(PeriodCandleStick pcs : periodCandleList){
-		System.out.println("++"+DateUtil.dateToString(pcs.getCdlPeriodPoint().getDate())+"++"+DateUtil.dateToString(pcs.getCdlStickHigh().getDate()));
-		}
 		
 		//找波段
 		pcsm.assembly(
