@@ -277,7 +277,7 @@ public class TrendLineManager {
 					//当趋势线的基点太靠近时，重新寻找趋势线的基点
 					if(tline.len() < TREND_POINT_MIN_LEN){
 						basePointFirst = tline.getCdlStickSecond();
-						basePointPeriodFirst = tline.getCdlStickPeriodFirst();
+						basePointPeriodFirst = tline.getCdlStickPeriodSecond();
 						basePointFirstPcsCi = tline.getCdlStickSecond().getCi(); //记录当前第二个基点作为下次的开始基点
 						i = i - 1; 
 					}else{
@@ -413,6 +413,11 @@ public class TrendLineManager {
 			if(len < 1) len = 30;
 			periodCandleList=pcsm.getPeriodCandleStickByMins(cStick,period,len);
 			break;
+		}
+		
+		for(PeriodCandleStick pcs : periodCandleList){
+System.out.println("++"+DateUtil.dateToString(pcs.getCdlPeriodPoint().getDate())+" "+
+		DateUtil.dateToString(pcs.getCdlStickOpen().getDate())+" "+DateUtil.dateToString(pcs.getCdlStickClose().getDate()));			
 		}
 		
 		originalPeriodCandleList = (List)((ArrayList)periodCandleList).clone();

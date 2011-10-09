@@ -13,11 +13,11 @@ import java.util.List;
 public class PivotalCandleStickManager {
 	
 	private static final int TREND_LENTH = 5;
-	private static final double MAX_SLOPE = 500.7;
-	private static final double MIN_SLOPE = 0.00000000005;
-	private static final int RSI14_DOWN = 50; //55
-	private static final int RSI14_UP = 40; //45
-	private static final double EFFECTIVE_RAISE_FALL_PERCENT = 0.12;
+	private static final double MAX_SLOPE = 500.7;   //最大斜率
+	private static final double MIN_SLOPE = 0.00000000005; //最小斜率
+	private static final int RSI14_DOWN = 50; //下降趋势的RSI 55
+	private static final int RSI14_UP = 40; //上升趋势RSI 45
+	private static final double EFFECTIVE_RAISE_FALL_PERCENT = 0.12;//0.30;//0.12;//有效的上升或者下降比例
 	
 	private int arrayLength = 0;
 	private int currentPos = 0;
@@ -415,23 +415,23 @@ public class PivotalCandleStickManager {
 
 		}
 		
-//System.out.println("-----------trendSegmentList---------------");
-//for(int i = 0;i<trendSegmentList.size();i++){
-//	System.out.println(trendSegmentList.get(i).getStyle()+" "+
-//			DateUtil.dateToString(list.get(trendSegmentList.get(i).getStartId()).getPeriodFirst().getCdlStickHigh().getDate())
-//			+"-->"+
-//			DateUtil.dateToString(list.get(trendSegmentList.get(i).getEndId()).getPeriodSecond().getCdlStickHigh().getDate()));
-//}
-//
-//System.out.println("-----------highMap---------------");
-//for(int i :highMap.keySet()){
-//	System.out.println(highMap.get(i).getPeriodFirst()+"-->"+highMap.get(i).getPeriodSecond());
-//}
-//
-//System.out.println("-----------lowMap---------------");
-//for(int i :lowMap.keySet()){
-//	System.out.println(lowMap.get(i).getPeriodFirst()+"-->"+lowMap.get(i).getPeriodSecond());
-//}
+System.out.println("-----------trendSegmentList---------------");
+for(int i = 0;i<trendSegmentList.size();i++){
+	System.out.println(trendSegmentList.get(i).getStyle()+" "+
+			DateUtil.dateToString(list.get(trendSegmentList.get(i).getStartId()).getPeriodFirst().getCdlPeriodPoint().getDate())
+			+"-->"+
+			DateUtil.dateToString(list.get(trendSegmentList.get(i).getEndId()).getPeriodSecond().getCdlPeriodPoint().getDate()));
+}
+
+System.out.println("-----------highMap---------------");
+for(int i :highMap.keySet()){
+	System.out.println(highMap.get(i).getPeriodFirst()+"-->"+highMap.get(i).getPeriodSecond());
+}
+
+System.out.println("-----------lowMap---------------");
+for(int i :lowMap.keySet()){
+	System.out.println(lowMap.get(i).getPeriodFirst()+"-->"+lowMap.get(i).getPeriodSecond());
+}
 		
 		//根据segmentList的长度过滤合并趋势
 //		return trendSegmentListFilter(trendSegmentList);

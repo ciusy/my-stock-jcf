@@ -92,12 +92,12 @@ public class PeriodCandleStick {
 		PeriodCandleStick p = (PeriodCandleStick)obj;
 			return p.cdlStickClose.equals(cdlStickClose) && p.cdlStickHigh.equals(cdlStickHigh)
 			       && p.cdlStickLow.equals(cdlStickLow) && p.cdlStickOpen.equals(cdlStickOpen)
-			       && p.id == id && p.period == period;
+			       && p.id == id && p.period == period && p.cdlPeriodPoint.equals(cdlPeriodPoint);
 	}
 
 	@Override
 	public String toString() {
-		return "PeriodCandleStick [cdlStickHigh=" + DateUtil.dateToStringWithTime(cdlStickHigh.getDate())
+		return "PeriodCandleStick [cdlPeriodPoint="+DateUtil.dateToStringWithTime(cdlPeriodPoint.getDate())+"],cdlStickHigh=" + DateUtil.dateToStringWithTime(cdlStickHigh.getDate())
 				+ "["+cdlStickHigh.getCi()+"], cdlStickLow=" + DateUtil.dateToStringWithTime(cdlStickLow.getDate()) 
 				+ "["+cdlStickLow.getCi()+"], id=" + id + ", period="
 				+ period + "]";
