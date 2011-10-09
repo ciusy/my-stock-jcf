@@ -18,12 +18,13 @@ public class TrendLineManagerTest {
 		//从数据库中读取数据扫描
 		StockDBTemplate template = new StockDBTemplate();
 		String whereSql = "";//数据库查询条件 如: date = ? and date = ?
-		Object[] params = null;//new Object[]{"t_sh600048","t_sh600039"};//查询条件的参数
+		Object[] params = null;//new Object[]{"t_sz300133"};//查询条件的参数
 		List<String> tbls = template.getStockTableName(whereSql,params);
 		
-		
+		/*******************需要修改的地方为这两行 *******************/
 		TrendStyle.Period period = TrendStyle.Period.week;//周线 //TrendStyle.Period.days;//日线
-		int linePeriod = 5;//周线//4; //line.dat里面日线的代码是4，其他的待修改
+		int linePeriod = 5;//周线//4; //line.dat里面日线的代码是4
+		/***********************************************************/
 		
 		//保存line.dat 路径
 		//this.getClass().getResource("/").getPath().substring(0, this.getClass().getResource("/").getPath().length()-4)+"/out/"

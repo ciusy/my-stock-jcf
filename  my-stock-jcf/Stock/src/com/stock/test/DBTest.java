@@ -27,7 +27,7 @@ public class DBTest {
 		DataImport di = new DataImport();
 		//C:\\jcb_zxjt\\T0002\\export
 		//H:\\shouji\\1
-		di.importPivotalCandleStick("c:\\1\\");
+		di.importPivotalCandleStick("c:\\");
 	}
 	
 	@Test
