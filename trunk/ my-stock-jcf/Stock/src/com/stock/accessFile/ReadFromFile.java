@@ -156,7 +156,9 @@ public class ReadFromFile {
 
 		byte[] other1 = new byte[2]; //划线类型
 		
-		byte[] other2 = new byte[4];//平行线信息
+		byte[] other2 = new byte[2];//平行线信息
+		byte[] other3 = new byte[2];//平行线信息
+		byte[] other4 = new byte[3];//平行线信息
 
 		try {
 			in = new FileInputStream(fileName);
@@ -184,7 +186,9 @@ public class ReadFromFile {
 				System.arraycopy(bytesInOneRecord, 41, PriceBytesTwo, 0, 4);
 				
 				//other2
-				System.arraycopy(bytesInOneRecord, 84, other2, 0, 4);
+				System.arraycopy(bytesInOneRecord, 84, other2, 0, 2);
+				System.arraycopy(bytesInOneRecord, 84, other4, 0, 3);
+				System.arraycopy(bytesInOneRecord, 86, other3, 0, 2);
 				
 				String marketNameStr = "";
 				int marketInt = bytesToInt(marketName);
@@ -231,8 +235,9 @@ public class ReadFromFile {
 								/ 100);
 
 				System.out.println("other1......" + bytesToInt(other1));
-				System.out.println("other2......" + bytesToInt(other2));
-
+				System.out.println("other2......" + bytesToInt(other2)+" "+ bytesToInt(dateBytesOne));
+				System.out.println("other3......" + bytesToInt(other3)+" "+ bytesToInt(dateBytesOne));
+				System.out.println("other4......" + bytesToInt(other4)+" "+ bytesToInt(dateBytesOne));
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
