@@ -20,6 +20,7 @@ public class DataImport {
 	/**
 	 * 从txt中读取有效的pivotalCandleStick保存到list中
 	 * txt中文件格式为 日期MM/dd/yyyy 分隔符\t .....
+	 * 按日期从小到大排列
 	 * @param fname
 	 * @return
 	 */
@@ -58,7 +59,7 @@ public class DataImport {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return pcslist;
+		return StockDBTemplate.filterErrorData(pcslist,fname);
 	}
 
 	/**
@@ -84,12 +85,15 @@ public class DataImport {
 					System.out.println(fname[i]+" "+readPivotalCandleStickFromTxt(strPath + "\\" + fname[i]).size());
 					//获取有效的stock信息
 					List<PivotalCandleStick> pcslist = readPivotalCandleStickFromTxt(strPath + "\\" + fname[i]);
+					
 					//获取文件名即表名和股票代码
 					String stockId = fname[i].substring(0,fname[i].lastIndexOf("."));
-					//判断数据表是否存在，不存在则创建
-					template.createTable(stockCreateSql(stockId));
+					
 					//导入数据
 					if(pcslist != null && pcslist.size()>0){
+						
+						//判断数据表是否存在，不存在则创建
+						template.createTable(stockCreateSql(stockId));
 						
 						//倒序导入,如果数据库中存在此条记录,则终止导入
 						for(int j=pcslist.size()-1;j>=0;j--){
@@ -137,10 +141,12 @@ public class DataImport {
 					List<PivotalCandleStick> pcslist = readPivotalCandleStickFromTxt(strPath + "\\" + fname[i]);
 					//获取文件名即表名和股票代码
 					String stockId = fname[i].substring(0,fname[i].lastIndexOf("."));
-					//判断数据表是否存在，不存在则创建
-					template.createTable(stockCreateSql(stockId));
+					
 					//导入数据
 					if(pcslist != null && pcslist.size()>0){
+						
+						//判断数据表是否存在，不存在则创建
+						template.createTable(stockCreateSql(stockId));
 						
 						for(PivotalCandleStick pcs : pcslist){
 							if(check){//检验
@@ -162,6 +168,12 @@ public class DataImport {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	
+	public void deleteErrorData(String stockId){
+		StockDBTemplate template = new StockDBTemplate();
+		template.deleteErrorData(stockId);
 	}
 
 	public boolean validate(String[] result) {

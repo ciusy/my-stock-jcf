@@ -172,10 +172,17 @@ public class OtherTest {
 		tslist.add(ts4);
 		tslist.add(ts5);
 		
-		PivotalCandleStickManager pcsm = new PivotalCandleStickManager();
-		List<TrendSegment> lst = pcsm.trendSegmentListFilter(tslist);
+//		PivotalCandleStickManager pcsm = new PivotalCandleStickManager();
+//		List<TrendSegment> lst = pcsm.trendSegmentListFilter(tslist);
 		
-		for(TrendSegment ts : lst){
+		
+		
+		for(TrendSegment ts : tslist.subList(0, 1)){
+			System.out.println(ts);
+		}
+		
+		tslist = tslist.subList(0, 1);
+		for(TrendSegment ts : tslist){
 			System.out.println(ts);
 		}
 		
