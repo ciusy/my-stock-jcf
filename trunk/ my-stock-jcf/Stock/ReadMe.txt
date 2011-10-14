@@ -1,0 +1,1 @@
+主操作测试用例和注释见：package com.stock.test.TrendLineManagerTest.testTrendLine();
