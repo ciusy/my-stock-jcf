@@ -12,7 +12,6 @@ public class TrendLineManager {
 	//趋势线的角度水平角度小于15度（平）或大于75度（陡）
 	private static final double MIN_TREND_ANGLE = 5;
 	private static final double MAX_TREND_ANGLE = 85;
-	
 	//扫描蜡烛的数量,其他的类推,如周线 300*5
 	private static final int CANDLE_COUNT = 300 ;
 	
@@ -413,11 +412,6 @@ public class TrendLineManager {
 			if(len < 1) len = 30;
 			periodCandleList=pcsm.getPeriodCandleStickByMins(cStick,period,len);
 			break;
-		}
-		
-		for(PeriodCandleStick pcs : periodCandleList){
-System.out.println("++"+DateUtil.dateToString(pcs.getCdlPeriodPoint().getDate())+" "+
-		DateUtil.dateToString(pcs.getCdlStickOpen().getDate())+" "+DateUtil.dateToString(pcs.getCdlStickClose().getDate()));			
 		}
 		
 		originalPeriodCandleList = (List)((ArrayList)periodCandleList).clone();
