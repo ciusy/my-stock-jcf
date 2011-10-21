@@ -8,12 +8,17 @@ package com.stock.trendline;
  */
 public class TrendLine {
 
-	//实际值
+	//基点实际值
 	private PivotalCandleStick cdlStickFirst;
 	private PivotalCandleStick cdlStickSecond;
-	//根据period生成的通达信上显示的日期
+	//根据period生成的通达信上显示的[日期]
 	private PivotalCandleStick cdlStickPeriodFirst;
 	private PivotalCandleStick cdlStickPeriodSecond;
+	//基点所在的蜡烛
+	private PeriodCandleStick cdlPeriodFirst;
+	private PeriodCandleStick cdlPeriodSecond;
+	//TrendSegment
+	private TrendSegment trendSegment;
 	
 	private double Slope;
 	private TrendStyle.Direct trendStyle;
@@ -129,10 +134,35 @@ public class TrendLine {
 	public void setCdlStickPeriodSecond(PivotalCandleStick cdlStickPeriodSecond) {
 		this.cdlStickPeriodSecond = cdlStickPeriodSecond;
 	}
+	
+	public PeriodCandleStick getCdlPeriodFirst() {
+		return cdlPeriodFirst;
+	}
+
+	public void setCdlPeriodFirst(PeriodCandleStick cdlPeriodFirst) {
+		this.cdlPeriodFirst = cdlPeriodFirst;
+	}
+
+	public PeriodCandleStick getCdlPeriodSecond() {
+		return cdlPeriodSecond;
+	}
+
+	public void setCdlPeriodSecond(PeriodCandleStick cdlPeriodSecond) {
+		this.cdlPeriodSecond = cdlPeriodSecond;
+	}
+	
+	public TrendSegment getTrendSegment() {
+		return trendSegment;
+	}
+
+	public void setTrendSegment(TrendSegment trendSegment) {
+		this.trendSegment = trendSegment;
+	}
 
 	//trendLine的跨度
 	public int len(){
-		return cdlStickSecond.getCi()-cdlStickFirst.getCi();
+//		return cdlStickSecond.getCi()-cdlStickFirst.getCi();
+		return cdlPeriodSecond.getId() - cdlPeriodFirst.getId();
 	}
 
 }

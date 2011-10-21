@@ -15,8 +15,8 @@ public class TrendLineManagerTest {
 	//主测试用例,调用方法
 	@Test
 	public void testTrendLine(){
-//		trendLineScan(TrendStyle.Period.days,"C:\\jcb_zxjt\\T0002\\");
-		trendLineScan(TrendStyle.Period.week,"C:\\jcb_zxjt\\T0002\\");
+		trendLineScan(TrendStyle.Period.days,"C:\\jcb_zxjt\\T0002\\");
+//		trendLineScan(TrendStyle.Period.week,"C:\\jcb_zxjt\\T0002\\");
 	}
 	
 	
@@ -31,8 +31,8 @@ public class TrendLineManagerTest {
 		
 		//从数据库中读取数据扫描
 		StockDBTemplate template = new StockDBTemplate();
-		String whereSql = "";//数据库查询条件 如: date = ? and date = ?
-		Object[] params = null;//new Object[]{"t_sz300133"};//查询条件的参数
+		String whereSql = "";//"table_name = ?";//数据库查询条件 如: date = ? and date = ?
+		Object[] params = null;//new Object[]{"t_sz300081"};//查询条件的参数
 		List<String> tbls = template.getStockTableName(whereSql,params);
 		
 		/*******************需要修改的地方为这两行 *******************/
@@ -72,11 +72,15 @@ public class TrendLineManagerTest {
 			//生成趋势线
 			tlm.getTrendLines(period,stockId);
 			
+//			for(TrendLine tl : tlm.getTrendLineList()){
+//				System.out.println(TrendLineManager.slopeEffective(tl.getSlope())+""+tl.getSlope()+" "+tl.isVisable()+"*"+DateUtil.dateToString(tl.getCdlStickPeriodFirst().getDate())+"-->"+DateUtil.dateToString(tl.getCdlStickPeriodSecond().getDate()));
+//			}
+			
 			//获取最后几条有效趋势线
 			int linecount = 1; //考虑的趋势线为最后一条，可修改
 			for(int j=tlm.getTrendLineList().size()-linecount;j<tlm.getTrendLineList().size()&&j>0;j++){
 				//趋势线性质良好时
-				if(tlm.getTrendLineList().get(j).isVisable()){
+				if(tlm.getTrendLineList().get(j).isVisable() && tlm.getTrendLineList().get(j).len()>=2){
 					String zxgname = "ZXG";
 					lineState = true;
 					//写line.dat到指定的路径
@@ -129,7 +133,7 @@ public class TrendLineManagerTest {
 		/*******************需要修改的地方为这两行 *******************/
 		TrendStyle.Period period = TrendStyle.Period.week;//周线 //TrendStyle.Period.days;//日线
 		int linePeriod = 5;//周线//4; //line.dat里面日线的代码是4
-		/***********************************************************/
+		/**********************************************************/
 		
 		//保存line.dat 路径
 		//this.getClass().getResource("/").getPath().substring(0, this.getClass().getResource("/").getPath().length()-4)+"/out/"

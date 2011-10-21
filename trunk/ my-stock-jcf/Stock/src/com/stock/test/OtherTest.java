@@ -80,9 +80,8 @@ public class OtherTest {
 	
 	
 	@Test public void test() throws ParseException{
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		System.out.println(DateUtil.daysBetween(new Date(df.parse("2007-01-23").getTime()), new Date(df.parse("2007-02-02").getTime())));
-		
+//		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//		System.out.println(DateUtil.daysBetween(new Date(df.parse("2007-01-23").getTime()), new Date(df.parse("2007-02-02").getTime())));
 	}
 	
 	@Test
