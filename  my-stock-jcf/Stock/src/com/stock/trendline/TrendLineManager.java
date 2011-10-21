@@ -7,8 +7,10 @@ public class TrendLineManager {
 	
 	//趋势线破掉百分比
 	private static final double BREAK_PERCENT = 0.03;
-	//趋势线最小蜡烛之间长度
+	//趋势线最小蜡烛之间长度日线(默认)
 	private static final int TREND_POINT_MIN_LEN = 14;
+	private static final int TREND_POINT_MIN_LEN_W = 4; //周线
+	
 	//趋势线的角度水平角度小于15度（平）或大于75度（陡）
 	private static final double MIN_TREND_ANGLE = 5;
 	private static final double MAX_TREND_ANGLE = 85;
@@ -119,11 +121,12 @@ public class TrendLineManager {
 		
 		List<TrendSegment> trendSegmentList = pcsm.findPeriodCandleStick(originalPeriodCandleList,pcsm.getSegmentList());
 
-		//TrendLine的第一个基点
+		//TrendLine的第一个基点(精确)
 		PivotalCandleStick basePointFirst = null ;
-		//TrendLine的第一个基点在通达信上面显示的蜡烛
-		PivotalCandleStick basePointPeriodFirst = null ;
-		
+		//TrendLine的第一个基点在通达信上面显示的蜡烛(精确)，主要是保存和利用他的日期信息
+		PivotalCandleStick basePointPcsFirst = null ;
+		//TrendLine的第一个基点在通达信上面显示的蜡烛(合并后蜡烛)
+		PeriodCandleStick basePointPeriodFirst = null ;
 		//第一个基点PeriodCandleStick的id，用于趋势基点较近的修正
 		int basePointFirstPcsCi = -1;
 		//遍历趋势段
@@ -175,9 +178,12 @@ public class TrendLineManager {
 								tline.setTrendStyle(TrendStyle.Direct.Rise);
 								tline.setSlope(slope);
 								tline.setPeriod(period);
-								tline.setTurnCdlStick(pcsm.getHighMap().get(trendSegmentList.get(i).getEndId()).getPeriodSecond().getCdlStickHigh());
+//								tline.setTurnCdlStick(pcsm.getHighMap().get(trendSegmentList.get(i).getEndId()).getPeriodSecond().getCdlStickHigh());
 								tline.setCdlStickPeriodFirst(pcsm.getHighMap().get(trendSegmentList.get(i).getStartId()).getPeriodFirst().getCdlPeriodPoint());
 								tline.setCdlStickPeriodSecond(periodcs[p].getCdlPeriodPoint());
+							    tline.setCdlPeriodFirst(pcsm.getHighMap().get(trendSegmentList.get(i).getStartId()).getPeriodFirst());
+							    tline.setCdlPeriodSecond(periodcs[p]);
+							    tline.setTrendSegment(trendSegmentList.get(i));
 							}
 						}
 						
@@ -196,7 +202,7 @@ public class TrendLineManager {
 					 x[m] = hightFirstCandleList.get(m).getCi();
 				 }
 				 //设置Trendline 的拟合线的 斜率和起始点
-				 trendLineFit(tline,x,y,hightFirstCandleList.size(),beginpcs);
+//				 trendLineFit(tline,x,y,hightFirstCandleList.size(),beginpcs);
 				 
 				 if(tline != null){
 					 tline.setColor(TrendStyle.Color.values()[trendLineList.size()%TrendStyle.Color.values().length]);
@@ -208,7 +214,8 @@ public class TrendLineManager {
 				//当 basePointFirst为空时才从趋势的起点开始计算斜率
 				if(basePointFirst == null){
 					basePointFirst = pcsm.getLowMap().get(trendSegmentList.get(i).getStartId()).getPeriodFirst().getCdlStickHigh();
-					basePointPeriodFirst = pcsm.getLowMap().get(trendSegmentList.get(i).getStartId()).getPeriodFirst().getCdlPeriodPoint();
+					basePointPcsFirst = pcsm.getLowMap().get(trendSegmentList.get(i).getStartId()).getPeriodFirst().getCdlPeriodPoint();
+					basePointPeriodFirst = pcsm.getLowMap().get(trendSegmentList.get(i).getStartId()).getPeriodFirst();
 				}
 				//用于保存上升趋势段中的每个Trend的低点的Candle，用于找到拟合线
 				List<PivotalCandleStick> lowFirstCandleList = new ArrayList<PivotalCandleStick>();
@@ -235,9 +242,12 @@ public class TrendLineManager {
 							
 							double diffY = periodcs[p].getCdlStickHigh().getHigh()
 								            - basePointFirst.getHigh();
+//							double currentSlope = 
+//								        getSlope(diffY,periodcs[p].getCdlStickHigh().getCi()
+//										    - basePointFirst.getCi());
 							double currentSlope = 
-								        getSlope(diffY,periodcs[p].getCdlStickHigh().getCi()
-										    - basePointFirst.getCi());
+						        getSlope(diffY,periodcs[p].getId()
+								    - basePointPeriodFirst.getId());
 							if(slope < currentSlope){
 								slope = currentSlope;
 								tline = new TrendLine();
@@ -246,9 +256,12 @@ public class TrendLineManager {
 								tline.setTrendStyle(TrendStyle.Direct.Fall);
 								tline.setSlope(slope);
 								tline.setPeriod(period);
-								tline.setTurnCdlStick(pcsm.getLowMap().get(trendSegmentList.get(i).getEndId()).getPeriodSecond().getCdlStickLow());						
-								tline.setCdlStickPeriodFirst(basePointPeriodFirst);
+//								tline.setTurnCdlStick(pcsm.getLowMap().get(trendSegmentList.get(i).getEndId()).getPeriodSecond().getCdlStickLow());						
+								tline.setCdlStickPeriodFirst(basePointPcsFirst);
 								tline.setCdlStickPeriodSecond(periodcs[p].getCdlPeriodPoint());
+								tline.setCdlPeriodFirst(basePointPeriodFirst);
+								tline.setCdlPeriodSecond(periodcs[p]);
+								tline.setTrendSegment(trendSegmentList.get(i));
 							}
 						}
 						
@@ -266,28 +279,38 @@ public class TrendLineManager {
 					 y[m] = lowFirstCandleList.get(m).getHigh();
 					 x[m] = lowFirstCandleList.get(m).getCi();
 				 }
-				 
 				
 				if(tline != null){
 					
 					//设置Trendline 的拟合线的 斜率和起始点
-					 trendLineFit(tline,x,y,lowFirstCandleList.size(),beginpcs);
+//					 trendLineFit(tline,x,y,lowFirstCandleList.size(),beginpcs);
 					 
 					//当趋势线的基点太靠近时，重新寻找趋势线的基点
-					if(tline.len() < TREND_POINT_MIN_LEN){
+					boolean tooshort = false;
+					if(period.equals(TrendStyle.Period.days) && tline.len() < TREND_POINT_MIN_LEN)
+						tooshort = true;
+					if(period.equals(TrendStyle.Period.week) && tline.len() < TREND_POINT_MIN_LEN_W)
+						tooshort = true;
+//					if(tline.len() < TREND_POINT_MIN_LEN)
+//						tooshort = true;
+					
+					if(false){//tooshort
 						basePointFirst = tline.getCdlStickSecond();
-						basePointPeriodFirst = tline.getCdlStickPeriodSecond();
+						basePointPcsFirst = tline.getCdlStickPeriodSecond();
+						basePointPeriodFirst = tline.getCdlPeriodSecond();
 						basePointFirstPcsCi = tline.getCdlStickSecond().getCi(); //记录当前第二个基点作为下次的开始基点
 						i = i - 1; 
 					}else{
 						tline.setColor(TrendStyle.Color.values()[trendLineList.size()%TrendStyle.Color.values().length]);
 						trendLineList.add(tline);
 						basePointFirst = null;
+						basePointPcsFirst = null;
 						basePointPeriodFirst = null;
 						basePointFirstPcsCi = -1;
 					}
 				}else{
 					basePointFirst = null;
+					basePointPcsFirst = null;
 					basePointPeriodFirst = null;
 					basePointFirstPcsCi = -1;
 				}
@@ -297,7 +320,7 @@ public class TrendLineManager {
 		}
 		
 		trendLineFilter();
-		searchBreakCdlStick();
+//		searchBreakCdlStick();
 	}
 	
 	public void getTrendLines(TrendStyle.Period period,String stockId,String whereSql,Object[] params){
@@ -446,8 +469,9 @@ public class TrendLineManager {
 	 */
 	public static boolean slopeEffective(double slope){
 		double absSlope = Math.abs(slope);
-		if(absSlope <= Math.tan(Math.toRadians(MIN_TREND_ANGLE)) 
-				|| absSlope >= Math.tan(Math.toRadians(MAX_TREND_ANGLE))) 
+		if(
+				absSlope <= Math.tan(Math.toRadians(MIN_TREND_ANGLE)) || 
+				absSlope >= Math.tan(Math.toRadians(MAX_TREND_ANGLE))) 
 			return false;
 		else 
 			return true;
@@ -500,7 +524,8 @@ public class TrendLineManager {
 			//去除条件
 			if((tl.getTrendStyle() == TrendStyle.Direct.Rise && (tl.getSlope() < 0) || !slopeEffective(tl.getSlope())) || 
 			 (tl.getTrendStyle() == TrendStyle.Direct.Fall && (tl.getSlope() > 0 || !slopeEffective(tl.getSlope()))) || 
-			 (tl.getPeriod() == TrendStyle.Period.days && tl.len() < TREND_POINT_MIN_LEN)) //trendline的基点之间的跨度
+			 (tl.getPeriod() == TrendStyle.Period.days && tl.len() < TREND_POINT_MIN_LEN)||  //trendline的基点之间的跨度日线
+			 (tl.getPeriod() == TrendStyle.Period.week && tl.len() < TREND_POINT_MIN_LEN_W)) //trendline的基点之间的跨度周线
 				trendLineList.get(i).setVisable(false);
 			else
 				trendLineList.get(i).setVisable(true);

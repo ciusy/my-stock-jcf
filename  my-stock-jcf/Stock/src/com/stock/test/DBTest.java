@@ -14,7 +14,7 @@ public class DBTest {
 	@Test
 	public void testImport(){
 		DataImport di = new DataImport();
-		di.importPivotalCandleStick("c:\\");//传入*.TXT文件所在路径
+		di.importPivotalCandleStick("C:\\zxjt");//传入*.TXT文件所在路径
 	}
 	
 	/**数据导入测试用例,主要用于比较更新数据到数据库中,可以用于修正错误数据0.16 **/
