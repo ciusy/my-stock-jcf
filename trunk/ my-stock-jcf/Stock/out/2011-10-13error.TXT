@@ -1,4 +1,0 @@
-[ERROR STOCK_INFO]:sh600416 PivotalCandleStick [ci=26, close=10.34, date=2011-08-19, high=10.36, low=10.11, open=0.15, volumn=4119800]
-[ERROR STOCK_INFO]:sh600416 PivotalCandleStick [ci=26, close=10.34, date=2011-08-19, high=10.36, low=10.11, open=0.15, volumn=4119800]
-[ERROR STOCK_INFO]:c:\\SH600416.TXT PivotalCandleStick [ci=0, close=9.01, date=2011-09-20, high=9.06, low=8.8, open=0.12, volumn=4202735]
-[ERROR STOCK_INFO]:c:\\SH600416.TXT PivotalCandleStick [ci=0, close=9.01, date=2011-09-20, high=9.06, low=8.8, open=0.12, volumn=4202735]
