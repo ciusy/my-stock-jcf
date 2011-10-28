@@ -14,17 +14,17 @@ public class DBTest {
 	@Test
 	public void testImport(){
 		DataImport di = new DataImport();
-		di.importPivotalCandleStick("C:\\");//传入*.TXT文件所在路径
+		di.importPivotalCandleStick("c:\\zxjt");//传入*.TXT文件所在路径
 	}
 	
-	/**数据导入测试用例,主要用于比较更新数据到数据库中,可以用于修正错误数据0.16 **/
+	/**数据导入测试用例,主要用于完全比较更新数据到数据库中,可以用于修正错误数据0.16 **/
 	@Test
 	public void testUpdateImport(){
 		DataImport di = new DataImport();
 		di.importPivotalCandleStickFullCheck("c:\\",true,true);//传入*.TXT文件所在路径
 	}
 	
-	/**删除数据库中的错误数据0.16,用于数据库中有错误数据而现实中又没有正确的数据而又想删除数据库中错误数据**/
+	/**逐支股票删除数据库中的错误数据0.16,用于数据库中有错误数据而现实中又没有正确的数据而又想删除数据库中错误数据**/
 	@Test
 	public void testDeleteErrorData(){
 		String stockId= "sh600416"; //深证加sz 上证sh
