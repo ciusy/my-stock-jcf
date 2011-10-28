@@ -126,7 +126,7 @@ public class DataImport {
 	 */
 	public void importPivotalCandleStickFullCheck(String strPath,boolean overwrite,boolean check) {
 		
-		StockDBTemplate template = new StockDBTemplate();
+		
 		File path = new File(strPath);
 		if (path.exists() && path.isDirectory()) {
 			try {
@@ -139,6 +139,7 @@ public class DataImport {
 					}
 				});
 				for (int i = 0; i < fname.length; i++) {
+					StockDBTemplate template = new StockDBTemplate();
 					System.out.println(fname[i]+" "+readPivotalCandleStickFromTxt(strPath + "\\" + fname[i]).size());
 					//获取有效的stock信息
 					List<PivotalCandleStick> pcslist = readPivotalCandleStickFromTxt(strPath + "\\" + fname[i]);
@@ -166,20 +167,21 @@ public class DataImport {
 						}
 						
 					}
+					
+					template.close();
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				template.close();
 			}
 		}
 		
-		template.close();
 	}
 	
 	
 	public void deleteErrorData(String stockId){
 		StockDBTemplate template = new StockDBTemplate();
 		template.deleteErrorData(stockId);
+		template.close();
 	}
 
 	public boolean validate(String[] result) {
