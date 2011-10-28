@@ -17,21 +17,31 @@ import java.util.Properties;
 public class JdbcAbstractTemplate{
 	
 	private static final String JDBC_PROPERTIES = "jdbc.properties";
-	private String driverClass;
-	private String url;
-	private String username;
-	private String password;
+	private static String driverClass;
+	private static String url;
+	private static String username;
+	private static String password;
 	
 	private PreparedStatement pstmt = null;
-	private Connection conn = null;
+	private static Connection conn = null;
 	private ResultSet rs = null;
 	
 	/**
 	 * 注册JDBC驱动
 	 */
-	public void registerDriver() {
+//	public void registerDriver() {
+//		try {
+//			readProperties(this.getClass().getResource("/").getPath()+"/"+JDBC_PROPERTIES);
+//			Class.forName(driverClass);
+//		} catch (ClassNotFoundException e) {
+//			System.out.println("注册驱动失败!");
+//			e.printStackTrace();
+//		}
+//	}
+	
+	static {
 		try {
-			readProperties(this.getClass().getResource("/").getPath()+"/"+JDBC_PROPERTIES);
+			readProperties(JdbcAbstractTemplate.class.getResource("/").getPath()+"/"+JDBC_PROPERTIES);
 			Class.forName(driverClass);
 		} catch (ClassNotFoundException e) {
 			System.out.println("注册驱动失败!");
@@ -44,7 +54,8 @@ public class JdbcAbstractTemplate{
 	 */
 	public Connection getConnection() {
 		try {
-			return DriverManager.getConnection(url, username, password);
+			if(conn == null)conn = DriverManager.getConnection(url, username, password);
+			return conn;
 		} catch (SQLException e) {
 			System.out.println("数据库连接失败!");
 			e.printStackTrace();
@@ -59,6 +70,7 @@ public class JdbcAbstractTemplate{
 		if (conn != null)
 			try {
 				conn.close();
+				conn = null;
 			} catch (SQLException e) {
 				System.out.println("数据库关闭失败!");
 				e.printStackTrace();
@@ -72,6 +84,7 @@ public class JdbcAbstractTemplate{
 		if (pstmt != null)
 			try {
 				pstmt.close();
+				pstmt = null;
 			} catch (SQLException e) {
 				System.out.println("语句关闭失败!");
 				e.printStackTrace();
@@ -89,9 +102,9 @@ public class JdbcAbstractTemplate{
 	public void save(String sql,Object[] params) {
 
 		try {
-			registerDriver();
-			conn = getConnection();
-			pstmt = conn.prepareStatement(sql);
+//			registerDriver();
+//			conn = getConnection();
+			pstmt = getConnection().prepareStatement(sql);
 			
 			if(params!=null && params.length>0){
 				for(int i=0; i<params.length; i++){
@@ -103,9 +116,11 @@ public class JdbcAbstractTemplate{
 		} catch (SQLException e) {
 			System.out.println("数据操作失败!");
 			e.printStackTrace();
-		} finally {
 			closeStatement();
 			closeConnection();
+		} finally {
+//			closeStatement();
+//			closeConnection();
 		}
 	}
 	
@@ -117,9 +132,9 @@ public class JdbcAbstractTemplate{
 	public void delete(String sql,Object[] params) {
 //		public void delete(String sql,Date params) {
 		try {
-			registerDriver();
-			conn = getConnection();
-			pstmt = conn.prepareStatement(sql);
+//			registerDriver();
+//			conn = getConnection();
+			pstmt = getConnection().prepareStatement(sql);
 			
 			if(params!=null && params.length>0){
 				for(int i=0; i<params.length; i++){
@@ -132,8 +147,8 @@ public class JdbcAbstractTemplate{
 			System.out.println("数据操作失败!");
 			e.printStackTrace();
 		} finally {
-			closeStatement();
-			closeConnection();
+//			closeStatement();
+//			closeConnection();
 		}
 	}
 
@@ -143,9 +158,9 @@ public class JdbcAbstractTemplate{
 	public ResultSet get(String sql,Object[] params) {
 
 		try {
-			registerDriver();
-			conn = getConnection();
-			pstmt = conn.prepareStatement(sql);
+//			registerDriver();
+//			conn = getConnection();
+			pstmt = getConnection().prepareStatement(sql);
 //			System.out.println("[sql:]"+sql);
 			if(params!=null && params.length>0){
 				for(int i=0; i<params.length; i++){
@@ -167,9 +182,9 @@ public class JdbcAbstractTemplate{
 	 */
 	public void create(String sql) {
 		try {
-			registerDriver();
-			conn = getConnection();
-			pstmt = conn.prepareStatement(sql);
+//			registerDriver();
+//			conn = getConnection();
+			pstmt = getConnection().prepareStatement(sql);
 			pstmt.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -181,7 +196,7 @@ public class JdbcAbstractTemplate{
 	 * 读取配置文件
 	 * @param filePath
 	 */
-	public void readProperties(String filePath) {
+	public static void readProperties(String filePath) {
 	  Properties props = new Properties();
 	  try {
 		  InputStream in = new BufferedInputStream(new FileInputStream(filePath));

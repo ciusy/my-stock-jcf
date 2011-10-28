@@ -110,8 +110,11 @@ public class DataImport {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
+				template.close();
 			}
 		}
+		
+		template.close();
 	}
 	
 	/**
@@ -166,8 +169,11 @@ public class DataImport {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
+				template.close();
 			}
 		}
+		
+		template.close();
 	}
 	
 	
