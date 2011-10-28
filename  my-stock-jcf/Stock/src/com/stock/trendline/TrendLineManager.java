@@ -3,6 +3,8 @@ package com.stock.trendline;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.stock.db.StockDBTemplate;
+
 public class TrendLineManager {
 	
 	//趋势线破掉百分比
@@ -115,9 +117,9 @@ public class TrendLineManager {
 	
 	
 	//找到趋势线对应的点(add周期) 通用
-	public void getTrendLines(TrendStyle.Period period,int len,String stockId,String whereSql,Object[] params){
+	public void getTrendLines(TrendStyle.Period period,int len,String stockId,String whereSql,Object[] params,StockDBTemplate template){
 		
-		prepareData(period,len,stockId,whereSql,params);
+		prepareData(period,len,stockId,whereSql,params,template);
 		
 		List<TrendSegment> trendSegmentList = pcsm.findPeriodCandleStick(originalPeriodCandleList,pcsm.getSegmentList());
 
@@ -323,16 +325,16 @@ public class TrendLineManager {
 //		searchBreakCdlStick();
 	}
 	
-	public void getTrendLines(TrendStyle.Period period,String stockId,String whereSql,Object[] params){
-		getTrendLines(period,0,stockId,whereSql,params);
+	public void getTrendLines(TrendStyle.Period period,String stockId,String whereSql,Object[] params,StockDBTemplate template){
+		getTrendLines(period,0,stockId,whereSql,params,template);
 	}
 	
-	public void getTrendLines(TrendStyle.Period period,String stockId){
-		getTrendLines(period,0,stockId,"",null);
+	public void getTrendLines(TrendStyle.Period period,String stockId,StockDBTemplate template){
+		getTrendLines(period,0,stockId,"",null,template);
 	}
 	
-	public void getTrendLines(TrendStyle.Period period,int len,String stockId){
-		getTrendLines(period,len,stockId,"",null);
+	public void getTrendLines(TrendStyle.Period period,int len,String stockId,StockDBTemplate template){
+		getTrendLines(period,len,stockId,"",null,template);
 	}
 	
 	
@@ -400,30 +402,29 @@ public class TrendLineManager {
 	 * 准备数据,带周期参数
 	 */
 	@SuppressWarnings("unchecked")
-	public void prepareData(TrendStyle.Period period,int len,String stockId,String whereSql,Object[] params){
+	public void prepareData(TrendStyle.Period period,int len,String stockId,String whereSql,Object[] params,StockDBTemplate template){
 
-		DataManager dm = new DataManager();
-		cStick = dm.getPivotalCandleStick(stockId,whereSql,params,CANDLE_COUNT);
+		cStick = template.getLimitStock(stockId, whereSql, params, CANDLE_COUNT);
 		
 		switch(period.ordinal()){
 		case 0:
-			cStick = dm.getPivotalCandleStick(stockId,whereSql,params,CANDLE_COUNT*5*4*3);
+			cStick = template.getLimitStock(stockId,whereSql,params,CANDLE_COUNT*5*4*3);
 			periodCandleList=pcsm.getPeriodCandleStickByQuarter(cStick);
 			break;
 		case 1:
-			cStick = dm.getPivotalCandleStick(stockId,whereSql,params,CANDLE_COUNT*5*4);
+			cStick = template.getLimitStock(stockId,whereSql,params,CANDLE_COUNT*5*4);
 			periodCandleList=pcsm.getPeriodCandleStickByMonth(cStick);
 			break;
 		case 2:
-			cStick = dm.getPivotalCandleStick(stockId,whereSql,params,CANDLE_COUNT*5);
+			cStick = template.getLimitStock(stockId,whereSql,params,CANDLE_COUNT*5);
 			periodCandleList=pcsm.getPeriodCandleStickByWeek(cStick);
 			break;
 		case 3:
-			cStick = dm.getPivotalCandleStick(stockId,whereSql,params,CANDLE_COUNT);
+			cStick = template.getLimitStock(stockId,whereSql,params,CANDLE_COUNT);
 			periodCandleList=pcsm.getPeriodCandleStickByDaysExtend(cStick, len);
 			break;
 		case 4:
-			cStick = dm.getPivotalCandleStick(stockId,whereSql,params,CANDLE_COUNT);
+			cStick = template.getLimitStock(stockId,whereSql,params,CANDLE_COUNT);
 			periodCandleList=pcsm.getPeriodCandleStickByHours(cStick, len);
 			break;
 		case 5:
@@ -431,7 +432,7 @@ public class TrendLineManager {
 		case 7:
 		case 8:
 		case 9:
-			cStick = dm.getPivotalCandleStick(stockId,whereSql,params,CANDLE_COUNT);
+			cStick = template.getLimitStock(stockId,whereSql,params,CANDLE_COUNT);
 			if(len < 1) len = 30;
 			periodCandleList=pcsm.getPeriodCandleStickByMins(cStick,period,len);
 			break;

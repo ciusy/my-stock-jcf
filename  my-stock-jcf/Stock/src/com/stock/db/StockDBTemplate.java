@@ -110,7 +110,7 @@ public class StockDBTemplate extends JdbcAbstractTemplate {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}finally {
-				close();
+//				close();
 			}
 			
 		return (PivotalCandleStick[])pcslst.toArray(new PivotalCandleStick[0]);
@@ -131,7 +131,7 @@ public class StockDBTemplate extends JdbcAbstractTemplate {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}finally {
-				close();
+//				close();
 			}
 		return tablelst;
 	}
