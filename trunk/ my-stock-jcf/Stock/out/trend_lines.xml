@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <trend_lines>
   <trend_line>
-    <date0>2011-08-29 00:00:00</date0>
-    <date1>2011-09-28 00:00:00</date1>
-    <value0>39.88</value0>
-    <value1>26.21</value1>
-    <line_color>ff000000</line_color>
+    <date0>2011-08-30 00:00:00</date0>
+    <date1>2011-09-21 00:00:00</date1>
+    <value0>37.05</value0>
+    <value1>34.51</value1>
+    <line_color>ffc0c0c0</line_color>
     <line_alpha />
     <line_width />
     <dash_length>5</dash_length>
