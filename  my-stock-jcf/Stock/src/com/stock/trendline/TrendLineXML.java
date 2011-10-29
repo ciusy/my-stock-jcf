@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
-
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -16,7 +15,7 @@ import org.jdom.output.XMLOutputter;
 
 public class TrendLineXML {
 
-	SAXBuilder sb = new SAXBuilder();
+	SAXBuilder sb = new SAXBuilder(false);
 	XMLOutputter out = new XMLOutputter();
 
 	//写入到Trend_lines.xml中，得有模板文件
@@ -24,7 +23,8 @@ public class TrendLineXML {
 		try {
 			File file = new File(fileName);
 			if(!file.exists()) file.createNewFile();
-			Document doc = sb.build(fileName);
+//			Document doc = sb.build(new File(fileName));
+			Document doc = sb.build("file://"+fileName);
 			doc.removeContent();
 			Element trendLines = new Element("trend_lines");
 			doc.addContent(trendLines);

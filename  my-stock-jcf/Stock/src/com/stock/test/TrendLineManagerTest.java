@@ -52,7 +52,7 @@ public class TrendLineManagerTest {
 //		ReadFromFile.renameFile(zxgpath+"ZXG.blk");
 		//保存xml路径
 		String xmlpath = this.getClass().getResource("/").getPath().substring(0, this.getClass().getResource("/").getPath().length()-4)+"out/";
-		
+		System.out.println(xmlpath);
 		for(int i=0;i<tbls.size();i++){
 			
 			//趋势线管理类
@@ -111,10 +111,10 @@ public class TrendLineManagerTest {
 				}
 			}
 			
-			//保存ZXG.blk
-//			if(lineState){
-//				ReadFromFile.writeZXGblk(zxgpath+"ZXG.blk",market+stockCode);
-//			}
+//			保存ZXG.blk
+			if(lineState){
+				ReadFromFile.writeZXGblk(zxgpath+"ZXG.blk",market+stockCode);
+			}
 			
 		}
 		
