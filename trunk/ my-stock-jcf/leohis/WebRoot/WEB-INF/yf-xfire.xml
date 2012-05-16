@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+
+	<!-- 定义访问的url -->
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="urlMap">
+			<map>
+
+				<entry key="/GetYFMInFoService.ws">
+					<ref bean="yFMInFoService" />
+				</entry>
+
+				<entry key="/getYFMTypeService.ws">
+					<ref bean="yFMTypeService" />
+				</entry>
+
+				<entry key="/getYfmdosageTypeService.ws">
+					<ref bean="yfmdosageTypeService" />
+				</entry>
+
+				<entry key="/getYfmdosageUnitService.ws">
+					<ref bean="yfmdosageUnitService" />
+				</entry>
+				
+				<entry key="/getYfmsupplierService.ws">
+					<ref bean="yfmsupplierService" />
+				</entry>
+
+				<entry key="/getYfmwayToService.ws">
+					<ref bean="yYfmwayToService" />
+				</entry>
+
+				<entry key="/getYfmmanufacturerService.ws">
+					<ref bean="yfmmanufacturerService" />
+				</entry>
+
+				<entry key="/getYfmaliasService.ws">
+					<ref bean="yfmaliasService" />
+				</entry>
+
+				<entry key="/getYfmalertInventoryService.ws">
+					<ref bean="yfmalertInventoryService" />
+				</entry>
+				
+				<entry key="/getYfinbankTypeSettingService.ws">
+					<ref bean="yfinbankTypeSettingService" />
+				</entry>
+
+				<entry key="/getYfminbankAService.ws">
+					<ref bean="yfminbankAService" />
+				</entry>
+				
+				<entry key="/getYfmstockService.ws">
+					<ref bean="yfmstockService" />
+				</entry>
+
+				<entry key="/getYfinbankAitemService.ws">
+					<ref bean="yfinbankAitemService" />
+				</entry>
+
+				<entry key="/getYfmexbankAService.ws">
+					<ref bean="yfmexbankAService" />
+				</entry>
+
+				<entry key="/getYfaitemService.ws">
+					<ref bean="yfaitemService" />
+				</entry>
+
+				<entry key="/getYfexbankAitemService.ws">
+					<ref bean="yfExbankAItemService" />
+					           <!-- 对应C -->
+				</entry>
+
+				<entry key="/getYfsetExbankTypeService.ws">
+					<ref bean="yfsetExbankTypeService" />
+					           <!-- 对应C -->
+				</entry>
+
+				<entry key="/getYfdelChuKuDanService.ws">
+					<ref bean="yfdelChuKuDanService" />
+					           <!-- 对应C -->
+				</entry>
+
+				<entry key="/getYfpriceService.ws">
+					<ref bean="yfpriceService" />
+					           <!-- 对应C -->
+				</entry>
+
+				<entry key="/getSfpadjustRecordService.ws">
+					<ref bean="sfpadjustRecordService" />
+					           <!-- 对应C -->
+				</entry>
+
+				<entry key="/getPanDianService.ws">
+					<ref bean="panDianService" />
+					           <!-- 对应C -->
+				</entry>
+				<entry key="/YFApproveItemService.ws">
+					<ref bean="YFApproveItemServiceWS"/>
+				</entry>
+
+				<entry key="/getYFApproveTableService.ws">
+					<ref bean="YFApproveTableServiceWS"/>
+				</entry>
+				<entry key="/getYfcheckRecordService.ws">
+					<ref bean="YfcheckRecordServiceWS"/>
+				</entry>
+				<!--  add by xu start -->
+				
+				<entry key="/yfGiveSfService.ws">
+					<ref bean="yfGiveSfServiceWS"/>
+				</entry>
+				<!--  add by xu end -->
+			</map>
+		</property>
+	</bean>
+
+	<!-- 服务请求的地址，与上面访问的url地址是对应的 -->
+
+
+	<bean id="yFMInFoService" parent="baseWebService">
+		<property name="serviceBean" ref="YFMInFoService" />
+		<property name="serviceClass" value="leo.yf.service.iface.YFMInFoService" />
+	</bean>
+
+	<bean id="yFMTypeService" parent="baseWebService">
+		<property name="serviceBean" ref="YFMTypeService" />
+		<property name="serviceClass" value="leo.yf.service.iface.YFMTypeService" />
+	</bean>
+
+	<bean id="yfmdosageTypeService" parent="baseWebService">
+		<property name="serviceBean" ref="YfmdosageTypeService" />
+		<property name="serviceClass" value="leo.yf.service.iface.YfmdosageTypeService" />
+	</bean>
+
+	<bean id="yfmdosageUnitService" parent="baseWebService">
+		<property name="serviceBean" ref="YfmdosageUnitService" />
+		<property name="serviceClass" value="leo.yf.service.iface.YfmdosageUnitService" />
+	</bean>
+
+	<bean id="yfmsupplierService" parent="baseWebService">
+		<property name="serviceBean" ref="YfmsupplierService" />
+		<property name="serviceClass" value="leo.yf.service.iface.YfmsupplierService" />
+	</bean>
+
+	<bean id="yYfmwayToService" parent="baseWebService">
+		<property name="serviceBean" ref="YfmwayToService" />
+		<property name="serviceClass" value="leo.yf.service.iface.YfmwayToService" />
+	</bean>
+	
+	<bean id="yfmmanufacturerService" parent="baseWebService">
+		<property name="serviceBean" ref="YfmmanufacturerService" />
+		<property name="serviceClass" value="leo.yf.service.iface.YfmmanufacturerService" />
+	</bean>
+	
+	<bean id="yfmaliasService" parent="baseWebService">
+		<property name="serviceBean" ref="YfmaliasService" />
+		<property name="serviceClass" value="leo.yf.service.iface.YfmaliasService" />
+	</bean>
+
+	<bean id="yfmalertInventoryService" parent="baseWebService">
+		<property name="serviceBean" ref="YfmalertInventoryService" />
+		<property name="serviceClass" value="leo.yf.service.iface.YfmalertInventoryService" />
+	</bean>
+
+	<bean id="yfinbankTypeSettingService" parent="baseWebService">
+		<property name="serviceBean" ref="YfinbankTypeSettingService" />
+		<property name="serviceClass" value="leo.yf.service.iface.YfinbankTypeSettingService" />
+	</bean>
+
+	<bean id="yfminbankAService" parent="baseWebService">
+		<property name="serviceBean" ref="YfminbankAService" />
+		<property name="serviceClass" value="leo.yf.service.iface.YfminbankAService" />
+	</bean>
+
+	<bean id="yfmstockService" parent="baseWebService">
+		<property name="serviceBean" ref="YfmstockService" />
+		<property name="serviceClass" value="leo.yf.service.iface.YfmstockService" />
+	</bean>
+
+	<bean id="yfinbankAitemService" parent="baseWebService">
+		<property name="serviceBean" ref="YfinbankAitemService" />
+		<property name="serviceClass" value="leo.yf.service.iface.YfinbankAitemService" />
+	</bean>
+
+	<bean id="yfmexbankAService" parent="baseWebService">
+		<property name="serviceBean" ref="YfmexbankAService" />
+		<property name="serviceClass" value="leo.yf.service.iface.YfmexbankAService" />
+	</bean>
+
+	<bean id="yfaitemService" parent="baseWebService">
+		<property name="serviceBean" ref="YfaitemService" />
+		<property name="serviceClass" value="leo.yf.service.iface.YfaitemService" />
+	</bean>
+	
+              <!-- 对应C -->
+	<bean id="yfExbankAItemService" parent="baseWebService">
+	                                     <!-- 自定义B -->
+		<property name="serviceBean" ref="YfexbankAitemService" />
+		<property name="serviceClass" value="leo.yf.service.iface.YfexbankAitemService" />
+	</bean>
+
+              <!-- 对应C -->
+	<bean id="yfsetExbankTypeService" parent="baseWebService">
+	                                     <!-- 自定义B -->
+		<property name="serviceBean" ref="YfsetExbankTypeService" />
+		<property name="serviceClass" value="leo.yf.service.iface.YfsetExbankTypeService" />
+	</bean>
+
+              <!-- 对应C -->
+	<bean id="yfdelChuKuDanService" parent="baseWebService">
+	                                     <!-- 自定义B -->
+		<property name="serviceBean" ref="YfdelChuKuDanService" />
+		<property name="serviceClass" value="leo.yf.service.iface.YfdelChuKuDanService" />
+	</bean>
+
+              <!-- 对应C -->
+	<bean id="yfpriceService" parent="baseWebService">
+	                                     <!-- 自定义B -->
+		<property name="serviceBean" ref="YfpriceService" />
+		<property name="serviceClass" value="leo.yf.service.iface.YfpriceService" />
+	</bean>
+
+	<bean id="sfpadjustRecordService" parent="baseWebService">
+	                                     <!-- 自定义B -->
+		<property name="serviceBean" ref="SfpadjustRecordService" />
+		<property name="serviceClass" value="leo.yf.service.iface.SfpadjustRecordService" />
+	</bean>
+
+	<bean id="panDianService" parent="baseWebService">
+	                                     <!-- 自定义B -->
+		<property name="serviceBean" ref="PanDianService" />
+		<property name="serviceClass" value="leo.yf.service.iface.PanDianService" />
+	</bean>
+	
+	<bean id="YFApproveItemServiceWS" parent="baseWebService">
+	                                     <!-- 审批项Service -->
+		<property name="serviceBean" ref="yFApproveItemService" />
+		<property name="serviceClass" value="leo.yf.service.iface.YFApproveItemService" />
+	</bean>
+	
+	<bean id="YFApproveTableServiceWS" parent="baseWebService">
+	                                     <!-- 审批项Service -->
+		<property name="serviceBean" ref="yFApproveTableService" />
+		<property name="serviceClass" value="leo.yf.service.iface.YFApproveTableService" />
+	</bean>
+	
+	<bean id="YfcheckRecordServiceWS" parent="baseWebService">
+	                                     <!-- 盘点Service -->
+		<property name="serviceBean" ref="yfcheckRecordService" />
+		<property name="serviceClass" value="leo.yf.service.iface.YfcheckRecordService" />
+	</bean>
+
+	<!-- add by xu -->
+	<bean id="yfGiveSfServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="yfGiveSfService" />
+		<property name="serviceClass" value="leo.yf.service.iface.YfGiveSfService" />
+	</bean>
+	<!-- add by xu -->
+</beans>
+
+
+
+

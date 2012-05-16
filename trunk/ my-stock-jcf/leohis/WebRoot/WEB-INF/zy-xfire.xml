@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+
+	<!-- 定义访问的url 
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="urlMap">
+			<map>
+				<entry key="/RegisterService.ws">
+					<ref bean="RegisterServiceWS" />
+				</entry>
+
+			</map>
+		</property>
+	</bean>
+	-->
+	<!-- 服务请求的地址，与上面访问的url地址是对应的
+
+	<bean id="RegisterServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="RegisterService" />
+		<property name="serviceClass"
+			value="leo.gh.service.iface.RegisterService" />
+	</bean>
+-->
+
+	<!-- 定义访问的url -->
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="urlMap">
+			<map>
+				<entry key="/GetZyHuShiChuLiService.ws">
+					<ref bean="zyHuShiChuLiService" />
+				</entry>
+
+				<entry key="/GetZySheZhiService.ws">
+					<ref bean="zySheZhiService" />
+				</entry>
+
+				<entry key="/GetZyYiShengChuLiService.ws">
+					<ref bean="zyYiShengChuLiService" />
+				</entry>
+                
+                <entry key="/GetZyGiveDzService.ws">
+					<ref bean="ZyGiveDzServiceWS" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<!-- 服务请求的地址，与上面访问的url地址是对应的-->
+
+	<bean id="zyHuShiChuLiService" parent="baseWebService">
+		<property name="serviceBean" ref="ZyHuShiChuLiService" />
+		<property name="serviceClass" value="leo.zy.service.iface.ZyHuShiChuLiService" />
+	</bean>
+
+	<bean id="zySheZhiService" parent="baseWebService">
+		<property name="serviceBean" ref="ZySheZhiService" />
+		<property name="serviceClass" value="leo.zy.service.iface.ZySheZhiService" />
+	</bean>
+
+	<bean id="zyYiShengChuLiService" parent="baseWebService">
+		<property name="serviceBean" ref="ZyYiShengChuLiService" />
+		<property name="serviceClass" value="leo.zy.service.iface.ZyYiShengChuLiService" />
+	</bean>
+	
+	<bean id="ZyGiveDzServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="ZyGiveDzService" />
+		<property name="serviceClass" value="leo.zy.service.iface.ZyGiveDzService" />
+	</bean>
+
+</beans>
+
+
+
+

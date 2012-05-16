@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+
+	<!-- 定义访问的url -->
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="urlMap">
+			<map>
+				<entry key="/MZChargeService.ws">
+					<ref bean="MZChargeServiceWS" />
+				</entry>
+
+				<entry key="/getSftownAllocateService.ws">
+					<ref bean="sftownAllocateService" />
+				</entry>
+				<entry key="/stuffChargeService.ws">
+					<ref bean="stuffChargeServiceWS" />
+				</entry>
+				<entry key="/zyDepositService.ws">
+					<ref bean="zyDepositServiceWS" />
+				</entry>
+				<entry key="/townAllocateService.ws">
+					<ref bean="townAllocateServiceWs" />
+
+				</entry>
+
+				<entry key="/SfreduceItemService.ws">
+					<ref bean="SfreduceItemServiceWS" />
+
+				</entry>
+
+				<entry key="/sfStatisticsService.ws">
+					<ref bean="sfStatisticsServiceWS" />
+
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- 服务请求的地址，与上面访问的url地址是对应的 -->
+
+	<bean id="MZChargeServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="mZChargeService" />
+		<property name="serviceClass" value="leo.sf.service.iface.MZChargeService" />
+	</bean>
+
+
+	<bean id="SfreduceItemServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="SfreduceItemService" />
+		<property name="serviceClass" value="leo.sf.service.iface.SfreduceItemService" />
+	</bean>
+
+
+	<bean id="sftownAllocateService" parent="baseWebService">
+		<property name="serviceBean" ref="SftownAllocateService" />
+		<property name="serviceClass" value="leo.sf.service.iface.SftownAllocateService" />
+	</bean>
+
+
+	<bean id="stuffChargeServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="stuffChargeService" />
+		<property name="serviceClass" value="leo.sf.service.iface.StuffChargeService" />
+	</bean>
+
+
+
+	<bean id="zyDepositServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="zyDepositService" />
+		<property name="serviceClass" value="leo.sf.service.iface.ZyDepositService" />
+	</bean>
+
+	<bean id="townAllocateServiceWs" parent="baseWebService">
+		<property name="serviceBean" ref="townAllocateService" />
+		<property name="serviceClass" value="leo.sf.service.iface.TownAllocateService" />
+	</bean>
+
+	<bean id="sfStatisticsServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="sfStatisticsService" />
+		<property name="serviceClass" value="leo.sf.service.iface.SfStatisticsService" />
+	</bean>
+
+
+
+</beans>
+
+
+
+

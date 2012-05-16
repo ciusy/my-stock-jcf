@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+	<!-- 定义访问的url -->
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="urlMap">
+			<map>
+				<!-- 显示WebService 访问路径,有几个路径就需要 配置几个路径。-->
+				<entry key="/GetPackKindInfoService.ws">
+					<ref bean="GetPackKindInfoServiceWS"></ref>
+				</entry>
+				<entry key="/GetCountOfGydisinfectPackUseReService.ws">
+					<ref bean="GetCountOfGydisinfectPackUseReServiceWS" />
+				</entry>
+				<entry key="/GetPackInstanceService.ws">
+					<ref bean="GetPackKindInstanceWS" /></entry>
+			</map>
+		</property>
+	</bean>
+	<!-- 服务请求的地址，与上面访问的url地址是对应的 -->
+	<bean id="GetPackKindInfoServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="GetAllPackInfoService" />
+		<property name="serviceClass" value="leo.gy.service.iface.GetPackKindInfoService" />
+	</bean>
+		<bean id="GetCountOfGydisinfectPackUseReServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="GetCountOfGydisinfectPackUseReService" />
+		<property name="serviceClass" value="leo.gy.service.iface.GetCountOfGydisinfectPackUseReService" />
+	</bean>
+	<bean id="GetPackKindInstanceWS" parent="baseWebService">
+		<property name="serviceBean" ref="GetPackInstanceService"></property>
+		<property name="serviceClass" value="leo.gy.service.iface.GetPackInstanceService"></property></bean>
+</beans>
+
+
+
+

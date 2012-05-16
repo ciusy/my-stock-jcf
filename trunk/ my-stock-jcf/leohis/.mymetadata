@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="leohis"
+  id="myeclipse.1310539365375"
+  context-root="/leohis"
+  j2ee-spec="5.0"
+  archive="leohis.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

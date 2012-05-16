@@ -1,0 +1,11 @@
+#Tue Jan 31 16:21:34 CST 2012
+eclipse.preferences.version=1
+encoding//src/leo/cf/dao/iface/CfacontentFrameworkDao.java=GBK
+encoding//src/leo/common/dao/DaoSupport.java=GBK
+encoding//src/leo/cs/dao/iface/CsconsumerDao.java=GBK
+encoding//src/leo/mz/dao/iface/MzCZAContentDao.java=GBK
+encoding//src/leo/os/dao/iface/OsmedicalInstInfoDao.java=GBK
+encoding//src/leo/ys/dao/iface/YSEarlyPregnancyVisitDao.java=GBK
+encoding//src/leo/ys/service/iface/YSZhanNeiService.java=GBK
+encoding//src/leo/ys/service/impl/YSZhanNeiServiceImpl.java=GBK
+encoding/<project>=GBK

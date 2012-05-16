@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+
+	<!-- 定义访问的url 	-->
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="urlMap">
+			<map>
+				<entry key="/DisposeService.ws">
+					<ref bean="DisposeServiceWS" />
+				</entry>
+
+				<entry key="/CzacontentService.ws">
+					<ref bean="CzacontentServiceWS" />
+				</entry>
+
+				<entry key="/CzbcultrasoundImageService.ws">
+					<ref bean="CzbcultrasoundImageServiceWS" />
+				</entry>
+
+
+				<entry key="/CzbcultrasoundIsService.ws">
+					<ref bean="CzbcultrasoundIsServiceWS" />
+				</entry>
+
+				<!--  add by xu start -->
+
+
+				<entry key="/czGiveWsService.ws">
+					<ref bean="czGiveWsServiceWS" />
+				</entry>
+				
+				<entry key="/CzdisposeItemDescribeService.ws">
+					<ref bean="CzdisposeItemDescribeServiceWS" />
+				</entry>
+				<!--  add by xu end -->
+			</map>
+		</property>
+	</bean>
+
+	<!-- 服务请求的地址，与上面访问的url地址是对应的	-->
+
+	<bean id="DisposeServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="DisposeService" />
+		<property name="serviceClass"
+			value="leo.bc.sercive.iface.DisposeService" />
+	</bean>
+
+	<bean id="CzacontentServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="CzacontentService" />
+		<property name="serviceClass"
+			value="leo.bc.sercive.iface.CzacontentService" />
+	</bean>
+
+
+	<bean id="CzbcultrasoundImageServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="CzbcultrasoundImageService" />
+		<property name="serviceClass"
+			value="leo.bc.sercive.iface.CzbcultrasoundImageService" />
+	</bean>
+
+
+	<bean id="CzbcultrasoundIsServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="CzbcultrasoundIsService" />
+		<property name="serviceClass"
+			value="leo.bc.sercive.iface.CzbcultrasoundIsService" />
+	</bean>
+
+	<!--  add by xu start -->
+
+	<bean id="czGiveWsServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="czGiveWsService" />
+		<property name="serviceClass"
+			value="leo.bc.sercive.iface.CzGiveWsService" />
+	</bean>
+	
+	<bean id="CzdisposeItemDescribeServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="CzdisposeItemDescribeService" />
+		<property name="serviceClass"
+			value="leo.bc.sercive.iface.CzdisposeItemDescribeService" />
+	</bean>
+	<!--  add by xu end -->
+
+</beans>
+
+
+
+

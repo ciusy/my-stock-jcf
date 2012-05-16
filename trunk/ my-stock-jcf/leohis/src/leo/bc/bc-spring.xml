@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<!--DisposeService  -->
+	<bean id="DisposeDao" class="leo.bc.dao.impl.DisposeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="DisposeService"
+		class="leo.bc.sercive.impl.DisposeServiceImpl">
+		<property name="disposeDao" ref="DisposeDao" />
+		<property name="csconsumerService" ref="CsconsumerService" />
+		<property name="czacontentDao" ref="CzacontentDao" />
+		<property name="getTime" ref="GetTime" />
+		<property name="osuformService" ref="osuformService" />
+		<property name="osstuffService" ref="osstuffService" />
+	    <property name="cfmedicalInstService" ref="CfmedicalInstService" />
+		<property name="cznkendIsDao" ref="CznkendIsDao" />
+		<property name="czshbioIsreDao" ref="CzshbioIsreDao" />
+		<property name="zyinpatientDao" ref="zyInpatientDao" />
+		<property name="czbcultrasoundIsDao" ref="CzbcultrasoundIsDao"></property>
+	</bean>
+	
+	
+	
+	<!--CzacontentService  -->
+	<bean id="CzacontentDao"
+		class="leo.bc.dao.impl.CzacontentDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="CzacontentService"
+		class="leo.bc.sercive.impl.CzacontentServiceImpl">
+		<property name="czacontentDao" ref="CzacontentDao" />
+	</bean>
+
+
+	<!--CzbcultrasoundImageService  -->
+	<bean id="CzbcultrasoundImageDao"
+		class="leo.bc.dao.impl.CzbcultrasoundImageDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="CzbcultrasoundImageService"
+		class="leo.bc.sercive.impl.CzbcultrasoundImageServiceImpl">
+		<property name="czbcultrasoundImageDao" ref="CzbcultrasoundImageDao" />
+	</bean>
+
+
+
+	<!--CzbcultrasoundIsService  -->
+	<bean id="CzbcultrasoundIsDao"
+		class="leo.bc.dao.impl.CzbcultrasoundIsDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="CzbcultrasoundIsService"
+		class="leo.bc.sercive.impl.CzbcultrasoundIsServiceImpl">
+		<property name="czbcultrasoundIsDao" ref="CzbcultrasoundIsDao" />
+	</bean>
+
+
+	<!--  add by xu start -->
+
+	<bean id="czGiveSfService"
+		class="leo.bc.sercive.impl.CzGiveSfServiceImpl">
+		<property name="disposeDao" ref="DisposeDao"></property>
+	</bean>
+	<bean id="czGiveWsService" class="leo.bc.sercive.impl.CzGiveWsServiceImpl">
+		<property name="czdisposeItemDescribeDao" ref="CzdisposeItemDescribeDao"></property>
+		<property name="disposeDao" ref="DisposeDao"></property>
+		<property name="czacontentDao" ref="CzacontentDao"></property>
+	</bean>
+	<!--  add by xu end -->
+	
+	
+	<bean id="CznkendIsDao"
+		class="leo.bc.dao.impl.CznkendIsDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="CzshbioIsreDao"
+		class="leo.bc.dao.impl.CzshbioIsreDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	
+	<bean id="CzdisposeItemDescribeDao"
+		class="leo.bc.dao.impl.CzdisposeItemDescribeImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="CzdisposeItemDescribeService"
+		class="leo.bc.sercive.impl.CzdisposeItemDescribeServiceImpl">
+		<property name="czdisposeItemDescribeDao" ref="CzdisposeItemDescribeDao" />
+	</bean>
+	
+	
+	<bean id="CzshbioIstermDao"
+		class="leo.bc.dao.impl.CzshbioIstermDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="CzshbioIstermService"
+		class="leo.bc.sercive.impl.CzshbioIstermServiceImpl">
+		<property name="czshbioIstermDao" ref="CzshbioIstermDao" />
+	</bean>
+	
+
+</beans>

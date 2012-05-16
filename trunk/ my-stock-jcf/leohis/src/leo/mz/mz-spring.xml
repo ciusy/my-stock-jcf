@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<!--  add by xu start -->
+	<!-- Dao注入 -->
+	<bean id="mzopDnDao" class="leo.mz.dao.impl.MzopDnDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="mzCzdisposeDao" class="leo.mz.dao.impl.MzCzdisposeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>	
+	
+	<bean id="mzdivaricateDao" class="leo.mz.dao.impl.MzCzdisposeDivaricateUDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>	
+	
+	<bean id="mzdescribeDao" class="leo.mz.dao.impl.MzCzdisposeItemDescribeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="mzCZAContentDao" class="leo.mz.dao.impl.MzCZAContentDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="czdisposalTypeDao" class="leo.mz.dao.impl.CzdisposalTypeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<!-- service注入 -->
+	<bean id="mzGiveSfService"
+		class="leo.mz.service.impl.MzGiveSfServiceImpl">
+		<property name="mzopDnDao" ref="mzopDnDao"></property>
+	</bean>
+	
+	<bean id="MzopDnService"
+		class="leo.mz.service.impl.MzopDnServiceImpl">
+		<property name="mzopDnDao" ref="mzopDnDao"></property>
+		<property name="mzczdescribedao" ref="mzdescribeDao"></property>
+		<property name="mzcdivaricatedao" ref="mzdivaricateDao"></property>
+		<property name="mzCzdisposeDao" ref="mzCzdisposeDao"></property>
+		<property name="mzCZAContentDao" ref="mzCZAContentDao"></property>
+		<property name="csconsumerService" ref="CsconsumerService"></property>
+	</bean>
+	<!--  
+	<bean id="mzcdivaricateService" class="leo.mz.service.impl.MzopDnServiceImpl">
+		<property name="mzcdivaricatedao" ref="mzdivaricateDao"></property>
+	</bean>-->
+	<!--  
+	<bean id="mzczdescribeService" class="leo.mz.service.impl.MzopDnServiceImpl">
+		<property name="mzczdescribedao" ref="mzdescribeDao"></property>
+	</bean>-->
+	<!--  add by xu end -->
+</beans>

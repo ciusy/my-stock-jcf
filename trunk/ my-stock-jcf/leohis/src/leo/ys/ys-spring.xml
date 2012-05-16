@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="ysFamiliRecordDao" class="leo.ys.dao.impl.YSFamiliRecordDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="YSFamiliRecordService" class="leo.ys.service.impl.YSFamiliRecordServiceImpl">
+		<property name="ysFamiliRecordDao" ref="ysFamiliRecordDao"></property>
+		<property name="csGYService" ref="csGiveYsService" />
+	</bean>
+	
+	<bean id="ysGeneralWifeDao" class="leo.ys.dao.impl.YSGeneralWifeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="YSGeneralWifeService" class="leo.ys.service.impl.YSGeneralWifeServiceImpl">
+		<property name="ysgeneralWifeDao" ref="ysGeneralWifeDao"></property>
+	</bean>
+	
+	<bean id="ysGeneralHusbandDao" class="leo.ys.dao.impl.YSGeneralHusbandDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="ySHealthyPregnantSmsDao" class="leo.ys.dao.impl.YSHealthyPregnantSmsDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="ySSmsModuleDao" class="leo.ys.dao.impl.YSSmsModuleDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="ySSmsModuleTermDao" class="leo.ys.dao.impl.YSSmsModuleTermDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="ysEarlyPregnancyVisitDao" class="leo.ys.dao.impl.YSEarlyPregnancyVisitDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="ySFamiliRecordBasicInfoDao" class="leo.ys.dao.impl.YSFamiliRecordBasicInfoDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="ySPregnancyResultDao" class="leo.ys.dao.impl.YSPregnancyResultDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="ySNotifyDao" class="leo.ys.dao.impl.YSNotifyDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="ySZiDongPingGuDao" class="leo.ys.dao.impl.YSZiDongPingGuDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="ySBirthDefectsDao" class="leo.ys.dao.impl.YSBirthDefectsDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	
+	<bean id="YSGeneralHusbandService" class="leo.ys.service.impl.YSGeneralHusbandServiceImpl">
+		<property name="ysgeneralHusbandDao" ref="ysGeneralHusbandDao"></property>
+	</bean>
+
+	<bean id="YSZhanNeiService" class="leo.ys.service.impl.YSZhanNeiServiceImpl">
+		<property name="ghregisterDao" ref="GhregisterDao" />
+		<property name="mzopDnDao" ref="mzopDnDao" />
+		<property name="ghregisterTypeDao" ref="GhregisterTypeDao" />
+		<property name="mzCzdisposeDao" ref="mzCzdisposeDao" />
+		<property name="czshbioIsreDao" ref="CzshbioIsreDao" />
+		<property name="mzCzdisposeItemDescribeDao" ref="mzdescribeDao"></property>
+		
+	</bean>
+	<bean id="ysEarlyPregnancyVisitService" class="leo.ys.service.impl.YSEarlyPregnancyVisitServiceImpl">
+		<property name="ysearlyDao" ref="ysEarlyPregnancyVisitDao" />
+	</bean>
+
+	<bean id="YSDuanXinChuLiService" class="leo.ys.service.impl.YSDuanXinChuLiServiceImpl">
+		<property name="ySSmsModuleDao" ref="ySSmsModuleDao"></property>
+		<property name="ySSmsModuleTermDao" ref="ySSmsModuleTermDao"></property>
+		<property name="ySFamiliRecordBasicInfoDao" ref="ySFamiliRecordBasicInfoDao"></property>
+		<property name="ySPregnancyResultDao" ref="ySPregnancyResultDao"></property>
+		<property name="ySEarlyPregnancyVisitDao" ref="ysEarlyPregnancyVisitDao"></property>
+		<property name="ySNotifyDao" ref="ySNotifyDao"></property>
+		<property name="osmedicalInstInfoDao" ref="OsmedicalInstInfoDao"></property>
+		<property name="cfcityDao" ref="CfcityDao"></property>
+		<property name="cfprefectureDao" ref="CfprefectureDao"></property>
+		<property name="cftownDao" ref="CftownDao"></property>
+		<property name="cfvillageDao" ref="CfvillageDao"></property>
+		<property name="csconsumerDao" ref="CsconsumerDao"></property>
+		<property name="ySHealthyPregnantSmsDao" ref="ySHealthyPregnantSmsDao"></property>
+		<property name="cfprovinceDao" ref="CfprovinceDao"></property>
+	</bean>
+
+	<bean id="ysZiDongPingGuService" class="leo.ys.service.impl.YSZiDongPingGuServiceImpl">
+		<property name="ySZiDongPingGuDao" ref="ySZiDongPingGuDao" />
+	</bean>
+
+	<bean id="ysPregnancyResultService" class="leo.ys.service.impl.YSPregnancyResultServiceImpl">
+		<property name="ySPregnancyResultDao" ref="ySPregnancyResultDao"></property>
+		<property name="ySFamiliRecordBasicInfoDao" ref="ySFamiliRecordBasicInfoDao"></property>
+	</bean>
+
+	<bean id="ysChuShengQueXianService" class="leo.ys.service.impl.YSChuShengQueXianServiceImpl">
+		<property name="ySBirthDefectsDao" ref="ySBirthDefectsDao"></property>
+	</bean>
+
+</beans>

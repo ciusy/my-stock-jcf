@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<!-- add by xu start -->
+	<bean id="zyInpatientDao" class="leo.zy.dao.impl.ZyInpatientDaoImpl"
+		scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="zyRedudancyConsumeDao"
+		class="leo.zy.dao.impl.ZyRedudancyConsumeDaoImpl" scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="zydoctorAdviceDao"
+		class="leo.zy.dao.impl.ZydoctorAdviceDaoImpl" scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="ZybedDao"
+		class="leo.zy.dao.impl.ZybedDaoImpl" scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="ZynurseGradeDao"
+		class="leo.zy.dao.impl.ZynurseGradeDaoImpl" scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="ZymadministrationDao"
+		class="leo.zy.dao.impl.ZymadministrationDaoImpl" scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="ZyipmedicineDao"
+		class="leo.zy.dao.impl.ZyipmedicineDaoImpl" scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="ZyippresExecuteDao"
+		class="leo.zy.dao.impl.ZyippresExecuteDaoImpl" scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="ZyipteatmentDao"
+		class="leo.zy.dao.impl.ZyipteatmentDaoImpl" scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="ZydoctorAdviceLongTermDao"
+		class="leo.zy.dao.impl.ZydoctorAdviceLongTermDaoImpl" scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="ZydischargeDao"
+		class="leo.zy.dao.impl.ZydischargeDaoImpl" scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+
+	<bean id="zyGiveSfService"
+		class="leo.zy.service.impl.ZyGiveSfServiceImpl">
+		<property name="zyInpatientDao" ref="zyInpatientDao"></property>
+		<property name="zyRedudancyConsumeDao"
+			ref="zyRedudancyConsumeDao">
+		</property>
+		<property name="zydoctorAdviceDao" ref="zydoctorAdviceDao"></property>
+	</bean>
+
+	<bean id="ZyHuShiChuLiService"
+		class="leo.zy.service.impl.ZyHuShiChuLiServiceImpl">
+		<property name="zyInpatientDao" ref="zyInpatientDao"></property>
+		<property name="cfcityDao" ref="CfcityDao"></property>
+		<property name="cfprefectureDao" ref="CfprefectureDao"></property>
+		<property name="cftownDao" ref="CftownDao"></property>
+		<property name="cfvillageDao" ref="CfvillageDao"></property>
+		<property name="csconsumerDao" ref="CsconsumerDao"></property>
+		<property name="cfprovinceDao" ref="CfprovinceDao"></property>
+		<property name="cfgroupDao" ref="CfgroupDao"></property>
+		<property name="csheadShowDao" ref="CsheadShowDao"></property>
+		<property name="zybedDao" ref="ZybedDao"></property>
+		<property name="mzCzdisposeDao" ref="mzCzdisposeDao"></property>
+		<property name="sfipdepositRecordDao" ref="sfipdepositRecordDao"></property>
+		<property name="zydoctorAdviceDao" ref="zydoctorAdviceDao"></property>
+		<property name="yfmexbankADao" ref="yfmexbankADao"></property>
+		<property name="yfExbankAItemDao" ref="yfExbankAItemDao"></property>
+		<property name="mzCzdisposeItemDescribeDao" ref="mzdescribeDao"></property>
+		<property name="zyipteatmentDao" ref="ZyipteatmentDao"></property>
+		<property name="mzCZAContentDao" ref="mzCZAContentDao"></property>
+		<property name="yfminbankADao" ref="YfminbankADao"></property>
+		<property name="yfinbankAitemDao" ref="YfinbankAitemDao"></property>
+		<property name="zyipmedicineDao" ref="ZyipmedicineDao"></property>
+	</bean>
+
+	<bean id="ZySheZhiService"
+		class="leo.zy.service.impl.ZySheZhiServiceImpl">
+		<property name="zybedDao" ref="ZybedDao"></property>
+		<property name="ghcostTypeDao" ref="GhcostTypeDao"></property>
+		<property name="zynurseGradeDao" ref="ZynurseGradeDao"></property>
+	</bean>
+
+	<bean id="ZyYiShengChuLiService"
+		class="leo.zy.service.impl.ZyYiShengChuLiServiceImpl">
+		<property name="zymadministrationDao" ref="ZymadministrationDao"></property>
+		<property name="mzCzdisposeItemDescribeDao" ref="mzdescribeDao"></property>
+		<property name="zydoctorAdviceDao" ref="zydoctorAdviceDao"></property>
+		<property name="zyipmedicineDao" ref="ZyipmedicineDao"></property>
+		<property name="zyipteatmentDao" ref="ZyipteatmentDao"></property>
+		<property name="zydoctorAdviceLongTermDao" ref="ZydoctorAdviceLongTermDao"></property>
+		<property name="cfacontentFrameworkDao" ref="CfacontentFrameworkDao"></property>
+		<property name="yfExbankAItemDao" ref="yfExbankAItemDao"></property>
+		<property name="yfminbankADao" ref="YfminbankADao"></property>
+		<property name="yfinbankAitemDao" ref="YfinbankAitemDao"></property>
+		<property name="czbcultrasoundIsDao" ref="CzbcultrasoundIsDao"></property>
+		<property name="czbcultrasoundImageDao" ref="CzbcultrasoundImageDao"></property>
+		<property name="mzCzdisposeDao" ref="mzCzdisposeDao"></property>
+		<property name="mzCZAContentDao" ref="mzCZAContentDao"></property>
+		<property name="yfmexbankADao" ref="yfmexbankADao"></property>
+		<property name="zydischargeDao" ref="ZydischargeDao"></property>
+		<property name="zyInpatientDao" ref="zyInpatientDao"></property>
+		<property name="czmilkGlandIsDao" ref="CzmilkGlandIsDao" />
+		<property name="czmilkGlandImageDao" ref="CzmilkGlandImageDao" />
+		<property name="czshbioIsreDao" ref="CzshbioIsreDao" />
+	</bean>
+	
+	<bean id="ZyGiveDzService"
+		class="leo.zy.service.impl.ZyGiveDzServiceImpl">
+		<property name="zyInpatientDao" ref="zyInpatientDao"></property>
+		<property name="zynurseGradeDao" ref="ZynurseGradeDao"></property>
+	</bean>
+	
+	
+	<!-- add by xu end -->
+</beans>

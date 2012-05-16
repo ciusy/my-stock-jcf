@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+
+	<!-- 定义访问的url -->
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="urlMap">
+			<map>
+				<!-- 显示WebService 访问路径,有几个路径就需要 配置几个路径。 -->
+				<entry key="/DuanXinChuLiService.ws">
+					<ref bean="DuanXinChuLiServiceWS" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<!-- 服务请求的地址，与上面访问的url地址是对应的 -->
+	<bean id="DuanXinChuLiServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="DuanXinChuLiService" />
+		<property name="serviceClass" value="leo.dx.service.iface.DuanXinChuLiService" />
+	</bean>
+
+</beans>
+
+
+
+

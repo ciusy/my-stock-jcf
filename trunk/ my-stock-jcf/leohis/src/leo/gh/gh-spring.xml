@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<bean id="GhcostTypeDao" class="leo.gh.dao.impl.GhcostTypeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="GhregisterTypeDao" class="leo.gh.dao.impl.GhregisterTypeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="GHRegisterDivaricateUDao" class="leo.gh.dao.impl.GHRegisterDivaricateUDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="GhregisterDao" class="leo.gh.dao.impl.GhregisterDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="GhmrCgDao" class="leo.gh.dao.impl.GhmrCgDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="RegisterService" class="leo.gh.service.impl.RegisterServiceImpl">
+		<property name="ghcostTypeDao" ref="GhcostTypeDao" />
+		<property name="ghregisterTypeDao" ref="GhregisterTypeDao" />
+		<property name="ghregisterDivaricateUDao" ref="GHRegisterDivaricateUDao" />
+		<property name="ghregisterDao" ref="GhregisterDao" />
+		<property name="ghmrCgDao" ref="GhmrCgDao"></property>
+		<property name="cfwholeDisposeService" ref="CfwholeDisposeService"></property>
+		<property name="cs" ref="CfmedicalInstService"></property>
+	</bean>
+
+	<!-- add by xu begin -->
+	<bean id="ghGiveSFService" class="leo.gh.service.impl.GhGiveSFServiceImpl">
+		<property name="ghcostTypeDao" ref="GhcostTypeDao" />
+		<property name="ghregisterDao" ref="GhregisterDao" />
+	</bean>
+	<!-- add by xu end -->
+</beans>

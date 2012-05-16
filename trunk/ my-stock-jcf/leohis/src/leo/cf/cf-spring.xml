@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<!-- DAO -->
+	<bean id="CfstuffDao" class="leo.cf.dao.impl.CfstuffDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="CftownDao" class="leo.cf.dao.impl.CftownDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="CfvillageDao" class="leo.cf.dao.impl.CfvillageDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="CfgroupDao" class="leo.cf.dao.impl.CfgroupDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="CfcityDao" class="leo.cf.dao.impl.CfcityDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="CfprovinceDao" class="leo.cf.dao.impl.CfprovinceDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="CfwholeDisposeDao" class="leo.cf.dao.impl.CfwholeDisposeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="CfprefectureDao" class="leo.cf.dao.impl.CfprefectureDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="CfmedicalInstDao" class="leo.cf.dao.impl.CfmedicalInstDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="CfdhpmodelDao" class="leo.cf.dao.impl.CfdhpmodelDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="CfacontentFrameworkDao" class="leo.cf.dao.impl.CfacontentFrameworkDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="CfmdetailDao" class="leo.cf.dao.impl.CfmdetailDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="CfhandleItemDetailDao" class="leo.cf.dao.impl.CfhandleItemDetailDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<!-- Service -->
+	<bean id="CfwholeDisposeService" class="leo.cf.service.impl.CfwholeDisposeServiceImpl">
+		<property name="cfwholeDisposeDao" ref="CfwholeDisposeDao" />
+	</bean>
+
+	<bean id="CfGiveGhService" class="leo.cf.service.impl.CfGiveGhServiceImpl">
+		<property name="cfprefectureDao" ref="CfprefectureDao" />
+		<property name="cfstuffDao" ref="CfstuffDao" />
+		<property name="cftownDao" ref="CftownDao" />
+		<property name="cfvillageDao" ref="CfvillageDao" />
+		<property name="cfgroupDao" ref="CfgroupDao" />
+		<property name="cfcityDao" ref="CfcityDao" />
+	</bean>
+
+	<bean id="CfmedicalInstService" class="leo.cf.service.impl.CfmedicalInstServiceImpl">
+		<property name="cfmedicalInstDao" ref="CfmedicalInstDao" />
+	</bean>
+
+	<bean id="CfacontentFrameworkService" class="leo.cf.service.impl.CfacontentFrameworkServiceImpl">
+		<property name="cfacontentFrameworkdao" ref="CfacontentFrameworkDao" />
+	</bean>
+	
+	<bean id="CfdhpmodelService" class="leo.cf.service.impl.CfdhpmodelServiceImpl">
+		<property name="cfdDao" ref="CfdhpmodelDao"></property>
+		<property name="cfhDao" ref="CfhandleItemDetailDao"></property>
+		<property name="cfmDao" ref="CfmdetailDao"></property>
+	</bean>
+
+
+	<!-- add by xu begin -->
+	<bean id="cfGiveSfService" class="leo.cf.service.impl.CfGiveSfServiceImpl">
+		<property name="cfmedicalInstDao" ref="CfmedicalInstDao" />
+		<property name="cftownDao" ref="CftownDao" />
+	</bean>
+	<!-- add by xu end -->
+
+	<bean id="CfXiTongSheZhiService" class="leo.cf.service.impl.CfXiTongSheZhiServiceImpl">
+		<property name="cfmedicalInstDao" ref="CfmedicalInstDao" />
+		<property name="osunitHasSDao" ref="OsunitHasSDao" />
+		<property name="osuformDao" ref="OsuformDao" />
+		<property name="yFMTypeDao" ref="YFMTypeDao" />
+		<property name="yfmdosageTypeDao" ref="YfmdosageTypeDao" />
+		<property name="yfmwayToDao" ref="YfmwayToDao" />
+		<property name="yfmdosageUnitDao" ref="YfmdosageUnitDao" />
+		<property name="yfmmanufacturerDao" ref="YfmmanufacturerDao" />
+		<property name="czdisposalTypeDao" ref="czdisposalTypeDao" />
+		<property name="mzCzdisposeItemDescribeDao" ref="mzdescribeDao" />
+		<property name="mzCzdisposeDivaricateUDao" ref="mzdivaricateDao" />
+		<property name="ghregisterTypeDao" ref="GhregisterTypeDao" />
+		<property name="cfprovinceDao" ref="CfprovinceDao"></property>
+		<property name="cfcityDao" ref="CfcityDao"></property>
+		<property name="cfprefectureDao" ref="CfprefectureDao"></property>
+		<property name="cftownDao" ref="CftownDao"></property>
+		<property name="osmedicalInstInfoDao" ref="OsmedicalInstInfoDao"></property>
+		<property name="osfnBlocksDao" ref="OsfnBlocksDao"></property>
+		<property name="osudefaultfnDao" ref="OsudefaultfnDao"></property>
+		<property name="osfnAuthorityFormDao" ref="OsfnAuthorityFormDao" />
+		<property name="osstuffDao" ref="OsstuffDao" />
+		<property name="cfvillageDao" ref="CfvillageDao" />
+		<property name="cfgroupDao" ref="CfgroupDao" />
+	</bean>
+	
+	<bean id="cfGiveYSService" class="leo.cf.service.impl.CFGiveYSServiceImpl">
+		<property name="cfprovDao" ref="CfprovinceDao" />
+		<property name="cfcityDao" ref="CfcityDao" />
+		<property name="cfprefecDao" ref="CfprefectureDao" />
+		<property name="cftownDao" ref="CftownDao" />
+		<property name="cfvillageDao" ref="CfvillageDao" />
+		<property name="cfgroupDao" ref="CfgroupDao" />
+	</bean>
+</beans>
