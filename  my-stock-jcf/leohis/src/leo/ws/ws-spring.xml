@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+	<!-- add by xu start -->
+	<bean id="wsDocumentDao" class="leo.ws.dao.impl.WsDocumentDaoImpl"
+		scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="wsorderItemDao" class="leo.ws.dao.impl.WsorderItemDaoImpl"
+		scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="wsDocWOrderFrameworkDao" class="leo.ws.dao.impl.WsDocWOrderFrameworkDaoImpl"
+		scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="wsDocWFrameworkDao" class="leo.ws.dao.impl.WsDocWFrameworkDaoImpl"
+		scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="wsstorageLocationDao" class="leo.ws.dao.impl.WsstorageLocationDaoImpl"
+		scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="wsidocWDao" class="leo.ws.dao.impl.WsidocWDaoImpl"
+		scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="wsdocWDao" class="leo.ws.dao.impl.WsdocWDaoImpl" scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="wsDocW1Dao" class="leo.ws.dao.impl.WsDocW1DaoImpl"
+		scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="wsVisitRemindDao" class="leo.ws.dao.impl.WsVisitRemindDaoImpl"
+		scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+
+	<bean id="wsDocumentService" class="leo.ws.service.impl.WsDocumentServiceImpl">
+		<property name="wsDocumentDao" ref="wsDocumentDao"></property>
+		<property name="czGiveWsService" ref="czGiveWsService"></property>
+		<property name="wsDocWOrderFrameworkDao" ref="wsDocWOrderFrameworkDao">
+		</property>
+		<property name="wsorderItemDao" ref="wsorderItemDao"></property>
+		<property name="wsDocWFrameworkDao" ref="wsDocWFrameworkDao"></property>
+		<property name="wsstorageLocationDao" ref="wsstorageLocationDao">
+		</property>
+	</bean>
+
+
+	<bean id="wsFillInService" class="leo.ws.service.impl.WsFillInServiceImpl">
+		<property name="czGiveWsService" ref="czGiveWsService"></property>
+		<property name="csconsumerService" ref="CsconsumerService"></property>
+		<property name="osGiveSfService" ref="osGiveSfService"></property>
+		<property name="mzGiveSfService" ref="mzGiveSfService"></property>
+		<property name="zyGiveSfService" ref="zyGiveSfService"></property>
+		<!-- <property name="csGiveSfService" ref="csGiveSfService"></property> -->
+		<property name="wsdocWDao" ref="wsdocWDao" />
+		<property name="cfwholeDisposeService" ref="CfwholeDisposeService">
+		</property>
+		<property name="wsidocWDao" ref="wsidocWDao" />
+
+		<property name="wsDocumentDao" ref="wsDocumentDao" />
+		<property name="wsDocW1Dao" ref="wsDocW1Dao"/>
+		<property name="wsVisitRemindDao" ref="wsVisitRemindDao"/>
+	</bean>
+	<!-- add by xu end -->
+</beans>

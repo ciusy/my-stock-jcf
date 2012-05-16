@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+	<!--将来所有的web服务信息就要写在这里了。-->
+	<!-- 引入XFire预配置信息 -->
+	<import resource="classpath:org/codehaus/xfire/spring/xfire.xml" />
+	<!-- 使用XFire导出器 -->
+	<bean id="baseWebService"
+		class="org.codehaus.xfire.spring.remoting.XFireExporter"
+		lazy-init="false" abstract="true">
+		<!-- 引用xfire.xml中定义的工厂 -->
+		<property name="serviceFactory" ref="xfire.serviceFactory" />
+		<!-- 引用xfire.xml中的xfire实例 -->
+		<property name="xfire" ref="xfire" />
+	</bean>
+
+
+	<import resource="bc-xfire.xml" />
+	<import resource="cf-xfire.xml" />
+	<import resource="cs-xfire.xml" />
+	<import resource="dz-xfire.xml" />
+	<import resource="gh-xfire.xml" />
+	<import resource="gy-xfire.xml" />
+	<import resource="mz-xfire.xml" />
+	<import resource="os-xfire.xml" />
+	<import resource="sf-xfire.xml" />
+	<import resource="util-xfire.xml" />
+	<import resource="ws-xfire.xml" />
+	<import resource="xt-xfire.xml" />
+	<import resource="yf-xfire.xml" />
+	<import resource="zy-xfire.xml" />
+	<import resource="rx-xfire.xml" />
+	<import resource="ydj-xfire.xml" />
+	<import resource="ys-xfire.xml"/>
+	<import resource="dx-xfire.xml"/>
+</beans>
+
+
+
+

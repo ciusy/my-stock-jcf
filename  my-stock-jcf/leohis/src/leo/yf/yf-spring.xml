@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+	<bean id="YFMInfoDao" class="leo.yf.dao.impl.YFMInfoDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" /><!-- 固定 -->
+	</bean>
+
+	<bean id="YFMInFoService" class="leo.yf.service.impl.YFMInFoServiceImpl">
+		<property name="yfmInfoDao" ref="YFMInfoDao" />
+
+	</bean>
+
+
+	<bean id="YFMTypeDao" class="leo.yf.dao.impl.YFMTypeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" /><!-- 固定 -->
+	</bean>
+
+	<bean id="YFMTypeService" class="leo.yf.service.impl.YFMTypeServiceImpl">
+		<property name="yFMTypeDao" ref="YFMTypeDao" />
+	</bean>
+
+
+	<bean id="YfmdosageTypeDao" class="leo.yf.dao.impl.YfmdosageTypeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<!-- 固定 -->
+	</bean>
+
+	<bean id="YfmdosageTypeService" class="leo.yf.service.impl.YfmdosageTypeServiceImpl">
+		<property name="yfmdosageTypeDao" ref="YfmdosageTypeDao" />
+	</bean>
+
+
+	<bean id="YfmdosageUnitDao" class="leo.yf.dao.impl.YfmdosageUnitDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<!-- 固定 -->
+	</bean>
+
+	<bean id="YfmdosageUnitService" class="leo.yf.service.impl.YfmdosageUnitServiceImpl">
+		<property name="yfmdosageUnitDao" ref="YfmdosageUnitDao" />
+	</bean>
+
+	<bean id="YfmsupplierDao" class="leo.yf.dao.impl.YfmsupplierDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<!-- 固定 -->
+	</bean>
+
+	<bean id="YfmsupplierService" class="leo.yf.service.impl.YfmsupplierServiceImpl">
+		<property name="yfmsupplierDao" ref="YfmsupplierDao" />
+	</bean>
+
+	<bean id="YfmwayToDao" class="leo.yf.dao.impl.YfmwayToDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" /><!-- 固定 -->
+	</bean>
+
+	<bean id="YfmwayToService" class="leo.yf.service.impl.YfmwayToServiceImpl">
+
+		<property name="yfmwayTodao" ref="YfmwayToDao" />
+	</bean>
+
+	<bean id="YfmmanufacturerDao" class="leo.yf.dao.impl.YfmmanufacturerDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<!-- 固定 -->
+	</bean>
+
+	<bean id="YfmmanufacturerService" class="leo.yf.service.impl.YfmmanufacturerServiceImpl">
+		<property name="yfmmanufacturerDao" ref="YfmmanufacturerDao" />
+	</bean>
+
+	<bean id="YfmaliasDao" class="leo.yf.dao.impl.YfmaliasDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" /><!-- 固定 -->
+	</bean>
+
+	<bean id="YfmaliasService" class="leo.yf.service.impl.YfmaliasServiceImpl">
+		<property name="yfmaliasDao" ref="YfmaliasDao" />
+	</bean>
+
+
+	<!-- add by xu start -->
+	<bean id="yfExbankAItemDao" class="leo.yf.dao.impl.YfExbankAItemDaoImpl"
+		scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- 自定义B -->
+	<bean id="YfexbankAitemService" class="leo.yf.service.impl.YfexbankAitemServiceImpl">
+		<property name="yfExbankAItemDao" ref="yfExbankAItemDao" />
+		<!-- 私有变量 -->         <!-- 对应A -->
+	</bean>
+
+
+	<bean id="yfmexbankADao" class="leo.yf.dao.impl.YfmexbankADaoImpl"
+		scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="YfmexbankAService" class="leo.yf.service.impl.YfmexbankAServiceImpl">
+		<property name="yfmexbankADao" ref="yfmexbankADao" />
+		<property name="yfexbankAitemDao" ref="yfExbankAItemDao" />
+		<property name="yfminbankADao" ref="YfminbankADao" />
+		<property name="yfmstockDao" ref="YfmstockDao" />
+		<property name="mzopDanDao" ref="mzopDnDao" />
+		<property name="yFApproveItemDao" ref="yFApproveItemDao" />
+		<property name="yFApproveTableDao" ref="yFApproveTableDao" />
+		<property name="zydoctorAdviceDao" ref="zydoctorAdviceDao" />
+		<property name="zyippresExecuteDao" ref="ZyippresExecuteDao" />
+		<property name="zyInpatientDao" ref="zyInpatientDao" />
+		<property name="sfAccountDetailDao" ref="sfAccountDetailDao" />
+	</bean>
+
+	<bean id="yfGiveSfService" class="leo.yf.service.impl.YfGiveSfServiceImpl">
+		<property name="yfExbankAItemDao" ref="yfExbankAItemDao"></property>
+		<property name="yfmexbankADao" ref="yfmexbankADao"></property>
+		<property name="yfinbankAitemDao" ref="YfinbankAitemDao" />
+		<property name="yfminbankADao" ref="YfminbankADao"/>
+	</bean>
+
+	<!-- add by xu end -->
+	<bean id="YfmalertInventoryDao" class="leo.yf.dao.impl.YfmalertInventoryDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<!-- 固定 -->
+	</bean>
+
+	<bean id="YfmalertInventoryService" class="leo.yf.service.impl.YfmalertInventoryServiceImpl">
+		<property name="yfmalertInventoryDao" ref="YfmalertInventoryDao" />
+	</bean>
+
+	<bean id="YfinbankTypeSettingDao" class="leo.yf.dao.impl.YfinbankTypeSettingDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<!-- 固定 -->
+	</bean>
+
+	<bean id="YfinbankTypeSettingService" class="leo.yf.service.impl.YfinbankTypeSettingServiceImpl">
+		<property name="yfinbankTypeSettingDao" ref="YfinbankTypeSettingDao" />
+	</bean>
+
+	<bean id="YfminbankADao" class="leo.yf.dao.impl.YfminbankADaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<!-- 固定 -->
+	</bean>
+
+	<bean id="YfminbankAService" class="leo.yf.service.impl.YfminbankAServiceImpl">
+		<property name="yfminbankADao" ref="YfminbankADao" />
+		<property name="yfinbankAitemDao" ref="YfinbankAitemDao" />
+		<property name="yFApproveItemDao" ref="yFApproveItemDao" />
+		<property name="yFApproveTableDao" ref="yFApproveTableDao" />
+		<property name="yfmstockDao" ref="YfmstockDao" />
+		<property name="zyInpatientDao" ref="zyInpatientDao" />
+		<property name="sfAccountDetailDao" ref="sfAccountDetailDao" />
+	</bean>
+
+	<bean id="YfmstockDao" class="leo.yf.dao.impl.YfmstockDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<!-- 固定 -->
+	</bean>
+
+	<bean id="YfmstockService" class="leo.yf.service.impl.YfmstockServiceImpl">
+		<property name="yfmstockDao" ref="YfmstockDao" />
+	</bean>
+
+	<bean id="YfinbankAitemDao" class="leo.yf.dao.impl.YfinbankAitemDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<!-- 固定 -->
+	</bean>
+
+	<bean id="YfinbankAitemService" class="leo.yf.service.impl.YfinbankAitemServiceImpl">
+		<property name="yfinbankAitemDao" ref="YfinbankAitemDao" />
+	</bean>
+
+	<!-- 自定义A -->
+	<bean id="YfaitemDao" class="leo.yf.dao.impl.YfaitemDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<!-- 固定 -->
+	</bean>
+
+	<bean id="YfaitemService" class="leo.yf.service.impl.YfaitemServiceImpl">
+		<property name="yfaitemDao" ref="YfaitemDao" />
+		<!-- 私有变量 -->    <!-- 对应A -->
+	</bean>
+
+	<!-- 自定义A -->
+	<bean id="YfsetExbankTypeDao" class="leo.yf.dao.impl.YfsetExbankTypeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<!-- 固定 -->
+	</bean>
+
+	<bean id="YfsetExbankTypeService" class="leo.yf.service.impl.YfsetExbankTypeServiceImpl">
+		<property name="yfsetExbankTypeDao" ref="YfsetExbankTypeDao" />
+		<!-- 私有变量 -->    <!-- 对应A -->
+	</bean>
+
+	<bean id="YfdelChuKuDanService" class="leo.yf.service.impl.YfdelChuKuDanServiceImpl">
+		<property name="yfExbankAItemDao" ref="yfExbankAItemDao" />
+		<property name="yfmexbankADao" ref="yfmexbankADao" />
+		<!-- 私有变量 -->    <!-- 对应A -->
+	</bean>
+
+	<!-- 自定义A -->
+	<bean id="YfpriceDao" class="leo.yf.dao.impl.YfpriceDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<!-- 固定 -->
+	</bean>
+
+	<bean id="YfpriceService" class="leo.yf.service.impl.YfpriceServiceImpl">
+		<property name="yfpriceDao" ref="YfpriceDao" />
+		<property name="sfpadjustRecordDao" ref="SfpadjustRecordDao" />
+		<!-- 私有变量 -->    <!-- 对应A -->
+	</bean>
+
+	<bean id="SfpadjustRecordDao" class="leo.yf.dao.impl.SfpadjustRecordDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<!-- 固定 -->
+	</bean>
+	<bean id="SfpadjustRecordService" class="leo.yf.service.impl.SfpadjustRecordServiceImpl">
+		<property name="sfpadjustRecordDao" ref="SfpadjustRecordDao" />
+		<!-- 私有变量 -->    <!-- 对应A -->
+	</bean>
+
+	<!-- 自定义A -->
+	<bean id="YfcheckRecordDao" class="leo.yf.dao.impl.YfcheckRecordDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<!-- 固定 -->
+	</bean>
+	<bean id="YfcheckRecordItemDao" class="leo.yf.dao.impl.YfcheckRecordItemDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<!-- 固定 -->
+	</bean>
+	<bean id="PanDianService" class="leo.yf.service.impl.PanDianServiceImpl">
+		<property name="yfcheckRecordDao" ref="YfcheckRecordDao" />
+		<property name="yfcheckRecordItemDao" ref="YfcheckRecordItemDao" />
+
+		<property name="yfmexbankADao" ref="yfmexbankADao" />
+		<property name="yfExbankAItemDao" ref="yfExbankAItemDao" />
+		<property name="yfminbankADao" ref="YfminbankADao" />
+		<property name="yfinbankAitemDao" ref="YfinbankAitemDao" />
+		<property name="yfmstockDao" ref="YfmstockDao" />
+		<property name="yFApproveItemDao" ref="yFApproveItemDao" />
+		<property name="yFApproveTableDao" ref="yFApproveTableDao" />
+		<!-- 私有变量 -->    <!-- 对应A -->
+	</bean>
+
+	<!-- 审批 -->
+	<bean id="yFApproveItemDao" class="leo.yf.dao.impl.YFApproveItemDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="yFApproveTableDao" class="leo.yf.dao.impl.YFApproveTableDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="yFApproveItemService" class="leo.yf.service.impl.YFApproveItemServiceImpl">
+		<property name="yfaItemDao" ref="yFApproveItemDao"></property>
+		<property name="yfaTableDao" ref="yFApproveTableDao"></property>
+	</bean>
+
+	<bean id="yFApproveTableService" class="leo.yf.service.impl.YFApproveTableServiceImpl">
+		<property name="yFApproveTableDao" ref="yFApproveTableDao"></property>
+		<property name="yFApproveItemDao" ref="yFApproveItemDao"></property>
+		<property name="yfmexbankADao" ref="yfmexbankADao"></property>
+		<property name="yfminbankADao" ref="YfminbankADao"></property>
+		<property name="yfcheckRecordDao" ref="YfcheckRecordDao"></property>
+	</bean>
+
+	<bean id="yfcheckRecordService" class="leo.yf.service.impl.YfcheckRecordServiceImpl">
+		<property name="yfcDao" ref="YfcheckRecordDao"></property>
+		<property name="yfcItemDao" ref="YfcheckRecordItemDao"></property>
+	</bean>
+
+</beans>

@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="sfLeaveHospBalanceDao" class="leo.sf.dao.impl.SfLeaveHospBalanceDaoImpl"
+		scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="sfopcgDao" class="leo.sf.dao.impl.SfopcgDaoImpl" scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="sfReduceItemDao" class="leo.sf.dao.impl.SfReduceItemDaoImpl"
+		scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="sfreduceTableDao" class="leo.sf.dao.impl.SfreduceTableDaoImpl"
+		scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+
+
+	<bean id="sfCgTableDao" class="leo.sf.dao.impl.SfCgTableDaoImpl"
+		scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="sfCreditCardDao" class="leo.sf.dao.impl.SfcreditCardDaoImpl"
+		scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="sfCsByOtherMethodDao" class="leo.sf.dao.impl.SfcsByOtherMethodDaoImpl"
+		scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="sfAccountDetailDao" class="leo.sf.dao.impl.SfAccountDetailDaoImpl"
+		scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="sfMzInvoiceHeadDao" class="leo.sf.dao.impl.SfMzInvoiceHeadDaoImpl"
+		scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="sfMzInvoiceContentDao" class="leo.sf.dao.impl.SfMzInvoiceContentDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="sfZyInvoiceHeadDao" class="leo.sf.dao.impl.SfZyInvoiceHeadDaoImpl"
+		scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="sfZyInvoiceContentDao" class="leo.sf.dao.impl.SfZyInvoiceContentDaoImpl"
+		scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+
+	<bean id="mZChargeService" class="leo.sf.service.impl.MZChargeServiceImpl">
+		<property name="mzGiveSfService" ref="mzGiveSfService" />
+		<property name="csconsumerService" ref="CsconsumerService" />
+
+		<property name="GHGiveSFService" ref="ghGiveSFService" />
+		<property name="osGiveSfService" ref="osGiveSfService" />
+
+		<property name="yfGiveSfService" ref="yfGiveSfService" />
+		<property name="czGiveSfService" ref="czGiveSfService" />
+		<property name="sfopcgDao" ref="sfopcgDao" />
+		<property name="sfReduceItemDao" ref="sfReduceItemDao" />
+		<property name="sfreduceTableDao" ref="sfreduceTableDao" />
+
+		<property name="sfCsByOtherMethodDao" ref="sfCsByOtherMethodDao" />
+		<property name="sfCgTableDao" ref="sfCgTableDao" />
+		<property name="csGiveSfService" ref="csGiveSfService"></property>
+		<property name="sfCreditCardDao" ref="sfCreditCardDao"></property>
+		<property name="sfMzInvoiceHeadDao" ref="sfMzInvoiceHeadDao" />
+		<property name="sfMzInvoiceContentDao" ref="sfMzInvoiceContentDao" />
+		<property name="cfmedicalInstDao" ref="CfmedicalInstDao" />
+	</bean>
+
+	<bean id="SftownAllocateDao" class="leo.sf.dao.impl.SftownAllocateDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+		<!-- 固定 -->
+	</bean>
+
+	<bean id="SftownAllocateService" class="leo.sf.service.impl.SftownAllocateServiceImpl">
+		<property name="sftownAllocateDao" ref="SftownAllocateDao" />
+	</bean>
+
+
+
+	<bean id="stuffChargeService" class="leo.sf.service.impl.StuffChargeServiceImpl">
+		<property name="osGiveSfService" ref="osGiveSfService"></property>
+		<property name="sfCgTableDao" ref="sfCgTableDao"></property>
+	</bean>
+
+	<bean id="sfipdepositRecordDao" class="leo.sf.dao.impl.SfipdepositRecordDaoImpl"
+		scope="singleton">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+
+	<bean id="zyDepositService" class="leo.sf.service.impl.ZyDepositServiceImpl">
+		<property name="mzGiveSfService" ref="mzGiveSfService" />
+		<property name="csconsumerService" ref="CsconsumerService"></property>
+		<property name="csGiveSfService" ref="csGiveSfService"></property>
+		<property name="ghGiveSFService" ref="ghGiveSFService"></property>
+		<property name="sfipdepositRecordDao" ref="sfipdepositRecordDao">
+		</property>
+		<property name="zyGiveSfService" ref="zyGiveSfService"></property>
+		<property name="sfCgTableDao" ref="sfCgTableDao"></property>
+		<property name="zyInpatientDao" ref="zyInpatientDao"></property>
+		<property name="osGiveSfService" ref="osGiveSfService"></property>
+		<property name="czGiveSfService" ref="czGiveSfService"></property>
+		<property name="yfGiveSfService" ref="yfGiveSfService"></property>
+		<property name="sfCreditCardDao" ref="sfCreditCardDao" />
+		<property name="sfLeaveHospBalanceDao" ref="sfLeaveHospBalanceDao" />
+		<property name="sfReduceItemDao" ref="sfReduceItemDao" />
+		<property name="sfreduceTableDao" ref="sfreduceTableDao" />
+		<property name="zyHuShiChuLiService" ref="ZyHuShiChuLiService" />
+		<property name="sfZyInvoiceHeadDao" ref="sfZyInvoiceHeadDao" />
+		<property name="sfZyInvoiceContentDao" ref="sfZyInvoiceContentDao" />
+		<property name="cfmedicalInstDao" ref="CfmedicalInstDao" />
+	</bean>
+
+
+	<bean id="townAllocateService" class="leo.sf.service.impl.TownAllocateServiceImpl">
+		<property name="sftownAllocateDao" ref="SftownAllocateDao"></property>
+		<property name="sfAccountDetailDao" ref="sfAccountDetailDao"></property>
+		<property name="sfCgTableDao" ref="sfCgTableDao" />
+		<property name="yfmexbankADao" ref="yfmexbankADao" />
+		<property name="sfMzInvoiceHeadDao" ref="sfMzInvoiceHeadDao" />
+		<property name="sfMzInvoiceContentDao" ref="sfMzInvoiceContentDao" />
+	</bean>
+
+	<bean id="SfreduceItemService" class="leo.sf.service.impl.SfreduceItemServiceImpl">
+		<property name="sfReduceItemDao" ref="sfReduceItemDao"></property>
+		<property name="sfreduceTableDao" ref="sfreduceTableDao"></property>
+	</bean>
+
+	<bean id="sfStatisticsService" class="leo.sf.service.impl.SfStatisticsServiceImpl">
+		<property name="sfMzInvoiceContentDao" ref="sfMzInvoiceContentDao" />
+		<property name="sfZyInvoiceContentDao" ref="sfZyInvoiceContentDao" />
+		<property name="sfCgTableDao" ref="sfCgTableDao" />
+		<property name="sfipdepositRecordDao" ref="sfipdepositRecordDao" />
+	</bean>
+
+
+
+
+</beans>

@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<!-- 引入各个模块自己配置的xx-Spring.xml -->
+	<import resource="leo/bc/bc-spring.xml" />
+	<import resource="leo/cf/cf-spring.xml" />
+	<import resource="leo/cs/cs-spring.xml" />
+	<import resource="leo/dz/dz-spring.xml" />
+	<import resource="leo/gh/gh-spring.xml" />
+	<import resource="leo/gy/gy-spring.xml" />
+	<import resource="leo/mz/mz-spring.xml" />
+	<import resource="leo/os/os-spring.xml" />
+	<import resource="leo/sf/sf-spring.xml" />
+	<import resource="leo/ws/ws-spring.xml" />
+	<import resource="leo/xt/xt-spring.xml" />
+	<import resource="leo/yf/yf-spring.xml" />
+	<import resource="leo/zy/zy-spring.xml" />
+	<import resource="leo/ys/ys-spring.xml" />
+	<import resource="leo/rx/rx-spring.xml" />
+	<import resource="leo/ydj/ydj-spring.xml" />
+	<import resource="leo/util/util-spring.xml" />
+	<import resource="leo/dx/dx-spring.xml" />
+
+
+
+	<!-- 配置一些通用的Bean -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="configLocation"
+			value="classpath:hibernate.cfg.xml">
+		</property>
+	</bean>
+
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- 配置事务的传播特性 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<!-- 在开发的时候可以这样定义，但部署的时候一定要详细定义 -->
+			<tx:method name="*" propagation="REQUIRED" />
+			<!--  
+				<tx:method name="add*" propagation="REQUIRED"/>
+				<tx:method name="del*" propagation="REQUIRED"/>
+				<tx:method name="update*" propagation="REQUIRED"/>
+				<tx:method name="*" read-only="true"/>
+			-->
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- 配置哪些类哪些方法使用事务 -->
+	<aop:config>
+		<aop:pointcut id="allManagerMethod"
+			expression="execution(* leo.*.service.iface.*.*(..))" />
+		<aop:advisor advice-ref="txAdvice"
+			pointcut-ref="allManagerMethod" />
+	</aop:config>
+
+
+</beans>

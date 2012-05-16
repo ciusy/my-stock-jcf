@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+
+	<!-- 定义访问的url -->
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="urlMap">
+			<map>
+				<entry key="/CsconsumerService.ws">
+					<ref bean="CsconsumerServiceWS" />
+				</entry>
+				<!-- add by xu  start-->
+				<entry key="/CsGiveSfService.ws">
+					<ref bean="csGiveSfServiceWS" />
+				</entry>
+				<!-- add by xu  end-->
+				<entry key="/CsheadShowService.ws">
+					<ref bean="csheadShowServiceWS" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- 服务请求的地址，与上面访问的url地址是对应的-->
+
+	<bean id="CsconsumerServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="CsconsumerService" />
+		<property name="serviceClass"
+			value="leo.cs.service.iface.CsconsumerService" />
+	</bean>
+
+
+	<!-- add by xu start -->
+	<bean id="csGiveSfServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="csGiveSfService" />
+		<property name="serviceClass"
+			value="leo.cs.service.iface.CsGiveSfService" />
+	</bean>
+
+	<!-- add by xu end -->
+	
+	<bean id="csheadShowServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="CsheadShowService" />
+		<property name="serviceClass"
+			value="leo.cs.service.iface.CsheadShowService" />
+	</bean>
+
+</beans>
+
+
+
+

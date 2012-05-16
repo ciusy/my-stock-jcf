@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+
+	<!-- 定义访问的url -->
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="urlMap">
+			<map>
+				<entry key="/CfGiveGhService.ws">
+					<ref bean="CfGiveGhServiceWS" />
+				</entry>
+				<entry key="/CfwholeDisposeService.ws">
+					<ref bean="CfwholeDisposeServiceWS" />
+				</entry>
+
+				<entry key="/CfmedicalInstService.ws">
+					<ref bean="CfmedicalInstServiceWS" />
+				</entry>
+
+				<entry key="/cfGiveSfService.ws">
+					<ref bean="cfGiveSfServiceWS" />
+				</entry>
+				
+				<entry key="/CfXiTongSheZhiService.ws">
+					<ref bean="CfXiTongSheZhiServiceWS" />
+				</entry>
+				
+			</map>
+		</property>
+	</bean>
+
+	<!-- 服务请求的地址，与上面访问的url地址是对应的 -->
+	<bean id="CfwholeDisposeServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="CfwholeDisposeService" />
+		<property name="serviceClass" value="leo.cf.service.iface.CfwholeDisposeService" />
+	</bean>
+	<bean id="CfGiveGhServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="CfGiveGhService" />
+		<property name="serviceClass" value="leo.cf.service.iface.CfGiveGhService" />
+	</bean>
+
+	<bean id="CfmedicalInstServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="CfmedicalInstService" />
+		<property name="serviceClass" value="leo.cf.service.iface.CfmedicalInstService" />
+	</bean>
+
+	<bean id="CfdhpmodelServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="CfdhpmodelService"></property>
+		<property name="serviceClass" value="leo.cf.service.iface.CfdhpmodelService"></property>
+	</bean>
+
+	<bean id="CfacontentFrameworkServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="CfacontentFrameworkService"></property>
+		<property name="serviceClass"
+			value="leo.cf.service.iface.CfacontentFrameworkService"></property>
+	</bean>
+
+	<bean id="cfGiveSfServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="cfGiveSfService"></property>
+		<property name="serviceClass" value="leo.cf.service.iface.CfGiveSfService"></property>
+	</bean>
+	
+	<bean id="CfXiTongSheZhiServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="CfXiTongSheZhiService"></property>
+		<property name="serviceClass" value="leo.cf.service.iface.CfXiTongSheZhiService"></property>
+	</bean>
+	
+</beans>
+
+
+
+

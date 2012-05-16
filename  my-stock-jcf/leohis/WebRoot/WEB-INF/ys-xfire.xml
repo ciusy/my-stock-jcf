@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+
+	<!-- 定义访问的url 
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="urlMap">
+			<map>
+				<entry key="/RegisterService.ws">
+					<ref bean="RegisterServiceWS" />
+				</entry>
+
+			</map>
+		</property>
+	</bean>
+	-->
+	<!-- 服务请求的地址，与上面访问的url地址是对应的
+
+	<bean id="RegisterServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="RegisterService" />
+		<property name="serviceClass"
+			value="leo.gh.service.iface.RegisterService" />
+	</bean>
+-->
+
+	<!-- 定义访问的url -->
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="urlMap">
+			<map>
+				<entry key="/YSFamiliRecordService.ws">
+					<ref bean="YSFamiliRecordServicews" />					
+				</entry>
+				<entry key="/YSGeneralWifeService.ws">
+					<ref bean="YSGeneralWifeServicews" />					
+				</entry>
+
+				<entry key="/YSZhanNeiService.ws">
+					<ref bean="YSZhanNeiServicews" />					
+				</entry>
+				<entry key="/YSGeneralHusbandService.ws">
+					<ref bean="YSGeneralHusbandServicews" />					
+				</entry>
+				<entry key="/CsGiveYsService.ws">
+					<ref bean="CsGiveYsServicews"/>
+				</entry>
+				<entry key="/CFGiveYSService.ws">
+					<ref bean="CFGiveYSServicews"/>
+				</entry>
+				<entry key="/YSDuanXinChuLiService.ws">
+					<ref bean="YSDuanXinChuLiServicews"/>
+				</entry>
+				<entry key="/YSEarlyPregnancyVisitService.ws">
+					<ref bean="YSEarlyPregnancyVisitServicews"/>
+				</entry>
+				
+				<entry key="/YSZiDongPingGuService.ws">
+					<ref bean="YSZiDongPingGuServicews"/>
+				</entry>
+
+				<entry key="/YSPregnancyResultService.ws">
+					<ref bean="YSPregnancyResultServicews"/>
+				</entry>
+
+				<entry key="/YSChuShengQueXianService.ws">
+					<ref bean="YSChuShengQueXianServicews"/>
+				</entry>
+				
+			</map>
+		</property>
+	</bean>
+	
+	<!-- 服务请求的地址，与上面访问的url地址是对应的-->
+
+	<bean id="YSFamiliRecordServicews" parent="baseWebService">
+		<property name="serviceBean" ref="YSFamiliRecordService" />
+		<property name="serviceClass" value="leo.ys.service.iface.YSFamiliRecordService" />
+	</bean>
+
+	<bean id="YSGeneralWifeServicews" parent="baseWebService">
+		<property name="serviceBean" ref="YSGeneralWifeService" />
+		<property name="serviceClass" value="leo.ys.service.iface.YSGeneralWifeService" />
+	</bean>
+
+	<bean id="YSZhanNeiServicews" parent="baseWebService">
+		<property name="serviceBean" ref="YSZhanNeiService" />
+		<property name="serviceClass" value="leo.ys.service.iface.YSZhanNeiService" />
+	</bean>
+	
+	<bean id="YSGeneralHusbandServicews" parent="baseWebService">
+		<property name="serviceBean" ref="YSGeneralHusbandService" />
+		<property name="serviceClass" value="leo.ys.service.iface.YSGeneralHusbandService" />
+	</bean>
+	
+	<bean id="CsGiveYsServicews" parent="baseWebService">
+		<property name="serviceBean" ref="csGiveYsService" />
+		<property name="serviceClass" value="leo.cs.service.iface.CsGiveYsService"></property>
+	</bean>
+
+	<bean id="CFGiveYSServicews" parent="baseWebService">
+		<property name="serviceBean" ref="cfGiveYSService" />
+		<property name="serviceClass" value="leo.cf.service.iface.CFGiveYSService" />
+	</bean>
+	
+	<bean id="YSDuanXinChuLiServicews" parent="baseWebService">
+		<property name="serviceBean" ref="YSDuanXinChuLiService" />
+		<property name="serviceClass" value="leo.ys.service.iface.YSDuanXinChuLiService" />
+	</bean>
+	
+	<bean id="YSEarlyPregnancyVisitServicews" parent="baseWebService">
+		<property name="serviceBean" ref="ysEarlyPregnancyVisitService"/>
+		<property name="serviceClass" value="leo.ys.service.iface.YSEarlyPregnancyVisitService"/>
+	</bean>
+	
+	<bean id="YSZiDongPingGuServicews" parent="baseWebService">
+		<property name="serviceBean" ref="ysZiDongPingGuService"/>
+		<property name="serviceClass" value="leo.ys.service.iface.YSZiDongPingGuService"/>
+	</bean>
+
+	<bean id="YSPregnancyResultServicews" parent="baseWebService">
+		<property name="serviceBean" ref="ysPregnancyResultService"/>
+		<property name="serviceClass" value="leo.ys.service.iface.YSPregnancyResultService"/>
+	</bean>
+
+	<bean id="YSChuShengQueXianServicews" parent="baseWebService">
+		<property name="serviceBean" ref="ysChuShengQueXianService"/>
+		<property name="serviceClass" value="leo.ys.service.iface.YSChuShengQueXianService"/>
+	</bean>
+	
+</beans>
+
+
+
+

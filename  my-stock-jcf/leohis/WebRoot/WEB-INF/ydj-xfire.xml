@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+
+	<!-- 定义访问的url 	-->
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="urlMap">
+			<map>
+
+				<entry key="/CzcolposcopeImageService.ws">
+					<ref bean="CzcolposcopeImageServiceWS" />
+				</entry>
+
+
+				<entry key="/CzcolposcopeIsService.ws">
+					<ref bean="CzcolposcopeIsServiceWS" />
+				</entry>
+
+		
+			</map>
+		</property>
+	</bean>
+
+	<!-- 服务请求的地址，与上面访问的url地址是对应的	-->
+
+	<bean id="CzcolposcopeImageServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="CzcolposcopeImageService" />
+		<property name="serviceClass"
+			value="leo.ydj.service.iface.CzcolposcopeImageService" />
+	</bean>
+
+
+	<bean id="CzcolposcopeIsServiceWS" parent="baseWebService">
+		<property name="serviceBean" ref="CzcolposcopeIsService" />
+		<property name="serviceClass"
+			value="leo.ydj.service.iface.CzcolposcopeIsService" />
+	</bean>
+
+
+
+</beans>
+
+
+
+

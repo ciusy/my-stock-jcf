@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<!-- Dao配置 -->
+	<bean id="OsstuffDao" class="leo.os.dao.impl.OsstuffDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="OsuformDao" class="leo.os.dao.impl.OsuformDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="OsfnAuthorityFormDao" class="leo.os.dao.impl.OsfnAuthorityFormDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="OsmedicalInstInfoDao" class="leo.os.dao.impl.OsmedicalInstInfoDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="OsudefaultfnDao" class="leo.os.dao.impl.OsudefaultfnDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="OsunitHasSDao" class="leo.os.dao.impl.OsunitHasSDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="OsfnBlocksDao" class="leo.os.dao.impl.OsfnBlocksDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+
+
+	<!-- Service配置 -->
+	<bean id="LoginService" class="leo.os.service.impl.LoginServiceImpl">
+		<property name="osstuffDao" ref="OsstuffDao" />
+		<property name="osuformDao" ref="OsuformDao" />
+		<property name="osfnAuthorityFormDao" ref="OsfnAuthorityFormDao" />
+		<property name="osmedicalInstInfoDao" ref="OsmedicalInstInfoDao">
+		</property>
+	</bean>
+	<bean id="GiveGhService" class="leo.os.service.impl.GiveGhServiceImpl">
+		<property name="osuformDao" ref="OsuformDao"></property>
+		<property name="osstuffDao" ref="OsstuffDao"></property>
+		<property name="osmedicalInstInfoDao" ref="OsmedicalInstInfoDao">
+		</property>
+	</bean>
+
+	<!-- add by xu start -->
+	<bean id="osGiveSfService" class="leo.os.service.impl.OsGiveSfServiceImpl">
+		<property name="osstuffDao" ref="OsstuffDao"></property>
+		<property name="osuformDao" ref="OsuformDao"></property>
+		<property name="osmedicalInstInfoDao" ref="OsmedicalInstInfoDao"/>
+	</bean>
+	<!-- add by xu  end-->
+
+	<!-- add by lich  -->
+	<bean id="osuformService" class="leo.os.service.impl.OsuformServiceImpl">
+		<property name="osuformDao" ref="OsuformDao"></property>
+		<property name="osf" ref="OsudefaultfnDao"></property>
+		<property name="osunitHasSDao" ref="OsunitHasSDao"></property>
+		<property name="osmedicalInstInfoDao" ref="OsmedicalInstInfoDao"></property>
+	</bean>
+	<bean id="osstuffService" class="leo.os.service.impl.OsstuffServiceImpl">
+		<property name="osstuffDao" ref="OsstuffDao"></property>
+		<property name="osunitHasSDao" ref="OsunitHasSDao"></property>
+	</bean>
+	
+	
+</beans>
