@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+
+	<constant name="struts.devMode" value="false" />
+	<!-- -->
+	<constant name="struts.i18n.encoding" value="gbk" />
+	<constant name="struts.custom.i18n.resources" value="exceptionMessages"/>
+	<constant name="struts.locale" value="en_utf-8" /> 
+	 
+	<package name="ishequ" extends="json-default">
+	
+		<interceptors>
+			<interceptor name="pagerInterceptor" class="org.istock.filter.PagerInterceptor"/>
+			<interceptor-stack name="mydefault">
+				<interceptor-ref name="defaultStack">
+					<param name="exception.logEnabled">true</param>
+					<param name="exception.logLevel">error</param>
+				</interceptor-ref>
+				<interceptor-ref name="pagerInterceptor"/>
+			</interceptor-stack>
+		</interceptors>
+		
+		<default-interceptor-ref name="mydefault"/>
+		
+		<default-action-ref name="notfound"/>
+		
+		<global-results>
+			<result name="error">/error.jsp</result>
+			<result name="login">/login.jsp</result>
+		</global-results>
+		
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception"
+				result="error"/>
+		</global-exception-mappings>
+		
+		
+		<action name="notfound">
+			<result>/404.jsp</result>
+		</action>
+		
+		<action name="report" class="org.istock.action.ReportAction" method="showDay">  
+            <result name="show-suc">/index.jsp</result>  
+        </action>  
+
+	</package>
+	
+</struts>
